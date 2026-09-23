@@ -11,8 +11,7 @@ body::after {
   inset: 0;
   z-index: 60;                 /* encima de la barra (50) y del flotante (40) */
   pointer-events: none;
-  opacity: .05;
-  mix-blend-mode: overlay;
+  opacity: .03;               /* sin mix-blend-mode: mezclar toda la pantalla en cada cuadro trababa la entrada */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
   background-size: 200px 200px;
 }
@@ -20,7 +19,7 @@ body::after {
 /* En pantallas de alta densidad el grano se ve el doble de fino: se agranda
    el mosaico para que conserve el mismo tamaño aparente. */
 @media (min-resolution: 2dppx) {
-  body::after { background-size: 300px 300px; opacity: .042; }
+  body::after { background-size: 300px 300px; opacity: .025; }
 }
 
 /* El menú móvil abierto ya es una superficie sólida: el grano ahí estorba. */

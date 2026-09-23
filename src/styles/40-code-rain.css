@@ -21,14 +21,26 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  /* Fundidos bajo la nav (96 px) y hacia la siguiente sección (140 px): en CSS, no por cuadro. */
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 96px, #000 calc(100% - 140px), transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0, #000 96px, #000 calc(100% - 140px), transparent 100%);
 }
+
+/* Fundidos bajo la nav (96 px) y hacia la siguiente sección (140 px). Son dos capas fijas del color
+   del fondo encima del canvas, no un mask-image: la máscara obligaba a la GPU a recomponer todo el
+   lienzo en cada cuadro de la lluvia, y en gráficas integradas eso trababa la página. */
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.hero::before { top: 0; height: 96px; background: linear-gradient(to bottom, var(--bg-0), transparent); }
+.hero::after { bottom: 0; height: 140px; background: linear-gradient(to top, var(--bg-0), transparent); }
 
 .hero > .container {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* Sin JS no hay quien pinte el canvas: papel rayado con la hairline para que el hero nunca quede plano. */

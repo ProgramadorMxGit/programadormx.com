@@ -90,7 +90,7 @@ h3 { font-size:24px; line-height:1.23; letter-spacing:-.65px; }
 .hero-note svg { width:14px; height:14px; color:var(--ok); }
 .hero-note .note-divider { height:11px; width:1px; background:var(--line); }
 .hero-visual { position:relative; padding:0 0 64px 4px; margin-top:4px; min-width:0; z-index:2; }
-.hero-visual::before { content:""; position:absolute; inset:-70px -50px; z-index:-1; background:radial-gradient(ellipse at 45% 50%,#727adc33,transparent 67%); filter:blur(20px); pointer-events:none; }
+.hero-visual::before { content:""; position:absolute; inset:-70px -50px; z-index:-1; background:radial-gradient(ellipse at 45% 50%,#727adc30,#727adc12 40%,transparent 72%); pointer-events:none; }
 .visual-caption { display:flex; gap:12px; align-items:center; margin:0 8px 23px; font:400 8px var(--font-mono); letter-spacing:1.5px; color:#9ea2aa; }
 .tiny-plus { color:var(--accent); font-size:20px; font-weight:400; }
 .caption-rule { height:1px; background:#a2a6ad45; flex:1; }

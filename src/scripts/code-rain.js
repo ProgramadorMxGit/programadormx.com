@@ -327,6 +327,7 @@
     if (window.IntersectionObserver) { io = new IntersectionObserver(function (es) { inView = es[es.length - 1].isIntersecting; schedule(); }, { threshold: 0 }); io.observe(hero); }
     if (window.ResizeObserver) { ro = new ResizeObserver(onResize); ro.observe(hero); if (h1) ro.observe(h1); } else window.addEventListener('resize', onResize);
     layout(true); loadFont();
+    canvas.classList.add('is-on'); /* fundido de entrada en 99-premium-motion.css */
 
     return canvas.__pmxRain = {
       setStatic: function (v) { forceStatic = !!v; applyMode(); },
@@ -361,5 +362,13 @@
       for (i = 0; i < list.length; i++) { c = list[i]; if (!c.__pmxRain) PMX.codeRain.mount(c, { density: c.getAttribute('data-density'), intensity: c.getAttribute('data-intensity') }); }
     }
   };
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', PMX.codeRain.auto); else PMX.codeRain.auto();
+  /* Arranque diferido: armar la lluvia cuesta 150–200 ms de hilo principal (más en celular) y, si
+     ocurre durante la entrada del hero, la traba. Espera a que lleguen las fuentes (pmx:fonts, ver
+     head.html), deja correr la entrada (~1.1 s) y se monta en un momento libre del navegador. */
+  function arrancar() {
+    var idle = window.requestIdleCallback || function (f) { return setTimeout(f, 1); };
+    setTimeout(function () { idle(PMX.codeRain.auto, { timeout: 700 }); }, 1100);
+  }
+  if (document.documentElement.classList.contains('fonts-ok') || !document.fonts) arrancar();
+  else document.addEventListener('pmx:fonts', arrancar, { once: true });
 })();

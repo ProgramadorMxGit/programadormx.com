@@ -1,0 +1,17 @@
+<section id="productos" class="section products" aria-labelledby="products-title">
+  <div class="container">
+    <div class="section-heading" data-reveal><div><p class="eyebrow">MENOS VUELTAS. MÁS SOLUCIONES.</p><h2 id="products-title">Tú tienes un negocio.<br><span class="muted">Hagamos que fluya.</span></h2></div><p>Del primer mensaje al último pedido.<br>Herramientas sencillas que trabajan contigo.</p></div>
+    <div class="product-grid">
+      {{#each products}}
+      <article class="product-card {{#if destacado}}product-card--featured{{/if}}" data-product="{{ slug }}" data-reveal>
+        {{#if imagen_alt}}<div class="card-media"><img src="/assets/img/productos/{{ slug }}.webp" alt="{{ imagen_alt }}" width="1000" height="666" loading="lazy" decoding="async"></div>{{/if}}
+        <div class="product-card-top"><span class="product-icon">{{ icon icon }}</span><span class="product-category">{{#if destacado}}TU DÍA, MÁS FÁCIL{{else}}HECHO A TU MEDIDA{{/if}}</span><a class="card-arrow" href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" aria-label="Cotizar {{ nombre }}">{{ icon "arrow-up-right" }}</a></div>
+        <h3>{{#if landing_path}}<a href="{{ landing_path }}">{{ nombre }}</a>{{else}}{{ nombre }}{{/if}}</h3><p>{{ corto }}</p>
+        {{#if destacado}}<div class="product-mini"><span>{{ icon "check" }} {{ join para_quien " · " }}</span><div class="mini-track"><span>Tu cliente</span><i></i><span class="mini-track-app">{{ icon icon }} Tu app</span><i></i><span>Todo listo {{ icon "check" }}</span></div></div>{{/if}}
+        <div class="product-card-bottom"><span>Desde <b>{{ precio_fmt }}</b> <small>MXN</small></span><span>{{ entrega }}</span></div>
+      </article>
+      {{/each}}
+    </div>
+    <div class="custom-project" data-reveal><span>{{ icon "spark" }} ¿Tu idea no cabe en una tarjeta? Mejor todavía.</span><a href="{{ site.whatsapp_url }}" target="_blank" rel="noopener noreferrer">Cuéntame qué tienes en mente {{ icon "arrow-up-right" }}</a></div>
+  </div>
+</section>

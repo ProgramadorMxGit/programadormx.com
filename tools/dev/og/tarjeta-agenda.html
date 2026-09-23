@@ -1,0 +1,60 @@
+<meta charset="utf-8">
+<title>og-image landing agenda de citas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+  :root { --bg:#0a0b0d; --ink:#ededef; --ink-2:#b4b7bf; --accent:#7c85f0; }
+  * { box-sizing:border-box; margin:0; }
+  html, body { width:1200px; height:630px; overflow:hidden; }
+  body { background:var(--bg); position:relative; font-family:"IBM Plex Sans","Segoe UI",sans-serif; }
+
+  .foto { position:absolute; inset:0; background:url("v3-pantallas/landing-agenda.png") no-repeat 70% 45% / cover; }
+  .velo {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(100deg, #0a0b0d 0 28%, #0a0b0df2 42%, #0a0b0dcc 56%, #0a0b0d66 70%, #0a0b0d00 84%),
+      linear-gradient(0deg, #0a0b0d99 0 10%, transparent 38%);
+  }
+
+  .contenido { position:absolute; inset:0; padding:56px 60px; display:flex; flex-direction:column; justify-content:space-between; width:720px; }
+
+  .marca { display:flex; align-items:center; gap:13px; }
+  .marca img { width:34px; height:34px; display:block; }
+  .marca span { font-family:"Bricolage Grotesque",sans-serif; font-weight:600; font-size:25px; letter-spacing:-.8px; color:var(--ink); }
+  .marca b { font-weight:400; color:#b0b4bb; }
+  .marca i { font-style:normal; color:var(--accent); }
+
+  .eyebrow { font-family:"IBM Plex Mono",monospace; font-size:14px; letter-spacing:1.4px; color:var(--accent); margin-bottom:18px; }
+  h1 { font-family:"Bricolage Grotesque",sans-serif; font-weight:500; font-size:66px; line-height:1; letter-spacing:-3px; color:var(--ink); max-width:15ch; }
+  h1 em { font-style:normal; color:var(--accent); position:relative; }
+  h1 em::after { content:""; position:absolute; left:0; bottom:4px; width:94%; height:2px; background:linear-gradient(90deg,#7c85f080,transparent); }
+  .sub { font-size:20px; line-height:1.5; color:var(--ink-2); margin-top:20px; max-width:34ch; }
+
+  .pie { display:flex; align-items:center; gap:16px; }
+  .dato { font-family:"IBM Plex Mono",monospace; font-weight:500; font-size:14px; letter-spacing:.5px; color:var(--ink); border:1px solid #6a6e78; border-radius:7px; padding:10px 14px; white-space:nowrap; }
+  .dato.acento { border-color:#7c85f066; color:var(--accent); }
+  .dominio { font-family:"IBM Plex Mono",monospace; font-size:15px; letter-spacing:.8px; color:#8a8f98; }
+</style>
+
+<div class="foto"></div>
+<div class="velo"></div>
+
+<div class="contenido">
+  <div class="marca">
+    <img src="logo-96.png" alt="">
+    <span>Programador<b>MX</b><i>.</i></span>
+  </div>
+
+  <div>
+    <p class="eyebrow">AGENDA DE CITAS POR WHATSAPP</p>
+    <h1>Tu agenda en orden.<br><em>Tu día más claro.</em></h1>
+    <p class="sub">Tus clientes agendan solos y les llega el recordatorio. Para barberías, salones y consultorios.</p>
+  </div>
+
+  <div class="pie">
+    <span class="dato acento">Desde $7,900 MXN</span>
+    <span class="dato">Entrega en 2 semanas</span>
+    <span class="dominio">programadormx.com</span>
+  </div>
+</div>

@@ -1,0 +1,135 @@
+/* ==========================================================================
+   15-media.css — fotos dentro de las tarjetas de producto.
+   Va después de 10-premium.css y no redefine nada suyo: solo agrega .card-media.
+   Quitar este archivo y el bloque {{#if imagen_alt}} de products.html deja
+   las tarjetas exactamente como estaban.
+   ========================================================================== */
+
+.card-media {
+  position: relative;
+  margin: -23px -23px 22px;          /* a sangre: cancela el padding de .product-card */
+  height: 168px;
+  overflow: hidden;
+  background: #16170f;
+  border-bottom: 1px solid var(--line);
+}
+
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 48%;
+  display: block;
+  transition: transform .7s var(--ease);
+}
+
+/* La foto se funde con la tarjeta por abajo: sin costura entre foto y texto. */
+.card-media::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 55%;
+  background: linear-gradient(to bottom, #14141100 0%, #141411a6 60%, #141411e0 100%);
+  pointer-events: none;
+}
+
+.product-card:hover .card-media img { transform: scale(1.045); }
+
+/* Fotos v2: la pantalla del celular va en la mitad de arriba; la banda ancha de las
+   destacadas la cortaba con el encuadre centrado. */
+[data-product="agenda-citas-whatsapp"] .card-media img { object-position: center 30%; }
+[data-product="pedidos-whatsapp"] .card-media img { object-position: center 6%; }
+
+/* Tarjetas destacadas: banda más alta porque son del doble de ancho. */
+.product-card--featured .card-media {
+  margin: -29px -30px 26px;
+  height: 236px;
+}
+
+@media (max-width: 1100px) {
+  .card-media { margin: -20px -20px 20px; height: 150px; }
+  .product-card--featured .card-media { height: 200px; }
+}
+
+@media (max-width: 899px) {
+  .product-card--featured .card-media { height: 176px; }
+}
+
+@media (max-width: 650px) {
+  .card-media { margin: -20px -20px 18px; height: 152px; }
+  .product-card--featured .card-media { margin: -25px -25px 22px; height: 188px; }
+  .product-card:not(.product-card--featured) .card-media { margin: -17px -15px 16px; height: 128px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-media img { transition: none; }
+  .product-card:hover .card-media img { transform: none; }
+}
+
+/* --------------------------------------------------------------------------
+   Portada de la landing: la foto va detrás del titular, con velo cálido
+   para que el texto se lea sin depender de la zona de la imagen.
+   -------------------------------------------------------------------------- */
+
+.landing-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--bg-0);
+  padding: 178px 0 88px;
+}
+
+.landing-hero__foto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 50%;
+  z-index: -2;
+}
+
+/* Velo: opaco a la izquierda, transparente sobre el celular de la derecha. */
+.landing-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(100deg, #141411 0 26%, #141411f0 40%, #141411c4 56%, #14141161 70%, #14141100 86%),
+    linear-gradient(0deg, #141411 0 4%, #14141100 34%);
+}
+
+.landing-hero__inner { max-width: 780px; margin-inline: 0; padding-left: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter))); }
+.landing-hero h1 { font-size: clamp(44px, 5.4vw, 74px); line-height: 1.02; letter-spacing: -2.6px; max-width: 15ch; margin-bottom: 22px; }
+.landing-hero .lede { max-width: 46ch; margin-bottom: 30px; }
+.landing-hero .cluster { gap: 18px; }
+
+.landing-hero__meta {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 12px;
+  margin-top: 26px;
+  font: 400 11px/1.6 var(--font-mono);
+  letter-spacing: .8px;
+  color: #a2a495;
+}
+.landing-hero__meta span { width: 1px; height: 11px; background: var(--line-2); }
+
+/* La sección que sigue ya no necesita el espacio de arriba del hero. */
+.page-standard--seguido { padding-top: 58px; }
+
+@media (max-width: 899px) {
+  .landing-hero { padding: 132px 0 64px; }
+  .landing-hero__foto { object-position: 70% 50%; }
+  .landing-hero::before {
+    background:
+      linear-gradient(105deg, #141411 0 42%, #141411e6 62%, #14141199 82%, #14141133 100%),
+      linear-gradient(0deg, #141411 0 8%, #14141100 42%);
+  }
+}
+
+@media (max-width: 650px) {
+  .landing-hero { padding: 118px 0 52px; }
+  .landing-hero h1 { letter-spacing: -1.8px; }
+  .landing-hero__meta { font-size: 10px; gap: 9px; }
+  .page-standard--seguido { padding-top: 44px; }
+}

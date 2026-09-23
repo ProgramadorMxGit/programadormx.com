@@ -1,0 +1,39 @@
+/* Motion is progressive enhancement; every part is readable without JS. */
+.hero__canvas { opacity:.21; }
+html.no-js .hero { background-image:none; }
+.hero-enter { animation:hero-enter 1.1s var(--ease) both; }
+.hero-copy>.hero-enter:nth-child(2) { animation-delay:.09s; }
+.hero-copy>.hero-enter:nth-child(3) { animation-delay:.18s; }
+.hero-copy>.hero-enter:nth-child(4) { animation-delay:.24s; }
+.hero-copy>.hero-enter:nth-child(5) { animation-delay:.31s; }
+.hero-copy>.hero-enter:nth-child(6) { animation-delay:.37s; }
+.hero-visual.hero-enter { animation-delay:.22s; animation-duration:1.4s; }
+.notification-card { animation:notification-float 7s ease-in-out infinite; }
+.orbit-one { animation:orbit-turn 70s linear infinite; }
+.wave-star { animation:star-turn 16s linear infinite; }
+.mini-track i::after { animation:signal-travel 3.2s ease-in-out infinite; }
+.mini-track i:nth-of-type(2)::after { animation-delay:1.3s; }
+.motion-ready [data-reveal] { opacity:0; transform:translateY(25px); transition:opacity .85s var(--ease),transform .85s var(--ease); }
+.motion-ready [data-reveal].is-visible { opacity:1; transform:translateY(0); }
+.product-grid [data-reveal]:nth-child(2n) { transition-delay:70ms; }
+.process-grid [data-reveal]:nth-child(2) { transition-delay:90ms; }
+.process-grid [data-reveal]:nth-child(3) { transition-delay:180ms; }
+.motion-ready .product-card.is-visible:hover { transform:translateY(-5px); transition-delay:0s; }
+.faq details[open]>div { animation:faq-open .3s var(--ease); }
+[data-demo-view]:not([hidden]) { animation:demo-enter .4s var(--ease); }
+.motion-paused *, .motion-paused *::before,.motion-paused *::after { animation-play-state:paused!important; }
+.motion-paused [data-reveal],.motion-paused .hero-enter { opacity:1!important; transform:none!important; animation:none!important; transition:none!important; }
+.motion-paused .faq details[open]>div,.motion-paused [data-demo-view] { opacity:1!important; transform:none!important; animation:none!important; }
+.motion-paused { scroll-behavior:auto; }
+@keyframes hero-enter { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+@keyframes notification-float { 0%,100% { transform:translateY(0) rotate(2deg); } 50% { transform:translateY(-8px) rotate(1deg); } }
+@keyframes orbit-turn { to { transform:rotate(360deg); } }
+@keyframes star-turn { to { transform:rotate(360deg); } }
+@keyframes signal-travel { 0%,10% { left:0; opacity:0; } 25% { opacity:1; } 90% { left:100%; opacity:1; } 100% { left:100%; opacity:0; } }
+@keyframes faq-open { from { opacity:0; transform:translateY(-5px); } to { opacity:1; transform:translateY(0); } }
+@keyframes demo-enter { from { opacity:.35; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
+@media (prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
+  *,*::before,*::after { animation:none!important; transition:none!important; }
+  .motion-ready [data-reveal],.hero-enter { opacity:1!important; transform:none!important; }
+}

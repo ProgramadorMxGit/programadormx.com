@@ -1,0 +1,91 @@
+/* ==========================================================================
+   00-tokens.css — programadormx.online
+   Dirección: "Código de mostrador" (ver DESIGN.md).
+   Solo tokens. Ninguna clase. Un solo tema (oscuro).
+   Ratios verificados con: py -3 tools/contrast_check.py --tokens
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+
+  /* ---- Fondos: carbón cálido (sesgo rojo/amarillo, nunca azul) ---------- */
+  --bg-0: #15120F;   /* body, hero, canvas, theme_color */
+  --bg-1: #1C1814;   /* bandas alternas, tarjetas, footer */
+  --bg-2: #241F1A;   /* superficies dentro de tarjetas, chips, hover de fila */
+  --bg-3: #2E2823;   /* hover/elevado de tarjeta, cajón móvil */
+
+  /* ---- Tinta: papel de ticket, no blanco puro ----------------------------- */
+  --ink:   #F4EEE6;  /* texto principal, titulares, cifras; relleno del botón papel */
+  --ink-2: #BDB3A7;  /* ledes, párrafos de tarjeta, enlaces de nav en reposo */
+  --ink-3: #9C938A;  /* meta mono, "desde", placeholders, sedimento de la lluvia.
+                        Pasa AA sobre bg-0/1/2/3 y sobre accent-soft (4.82–6.18:1). */
+
+  /* ---- Bordes ------------------------------------------------------------- */
+  --line:   #2A241F; /* hairline decorativa: tarjetas en reposo, divisores, nav scrolled.
+                        1.22:1 sobre bg-0: NUNCA como único borde de un control. */
+  --line-2: #726B61; /* borde de CONTROLES (inputs, botón ghost) y reglas punteadas de ticket.
+                        3.55:1 sobre bg-0 · 3.35:1 sobre bg-1 · 3.10:1 sobre bg-2 (cumple 1.4.11). */
+
+  /* ---- Acento: ámbar de foco de negocio abierto --------------------------- */
+  --accent:      #F0A63C; /* eyebrows, cursor de bloque, "desde", subrayado activo, "+" del FAQ,
+                             anillo de foco, cadenas de texto en la lluvia. NUNCA relleno de botón. */
+  --accent-ink:  #1C1206; /* texto sobre superficies ámbar (badge, chip relleno) */
+  --accent-2:    #7FB8C9; /* azul-verdoso frío: iconos de producto, palabras clave de la lluvia,
+                             .mono dentro de párrafos */
+  --accent-soft: #33240F; /* lavado ámbar: chip destacado, paso activo. Texto encima: ink, ink-2,
+                             accent o ink-3 (todos pasan AA). */
+
+  /* ---- Semánticos (no cuentan como acento) -------------------------------- */
+  --ok:   #7CC48B;  /* éxito de formulario, "incluido" */
+  --warn: #E8785A;  /* error de formulario (coral, para no confundirse con el ámbar) */
+
+  /* ---- WhatsApp: único relleno saturado del sitio ------------------------- */
+  --wa:     #25D366;
+  --wa-ink: #072D16; /* texto y glifo sobre verde (el blanco da 2.0:1: prohibido) */
+
+  /* ---- Tipografía --------------------------------------------------------- */
+  --font-display: "Bricolage Grotesque", "Bricolage Fallback", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body:    "IBM Plex Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    "IBM Plex Mono", "Cascadia Mono", Consolas, "Roboto Mono", Menlo, monospace;
+
+  /* Escala fluida (min 360 px → max 1160 px). Line-height por rol en 10-base.css. */
+  --step--1: clamp(0.8125rem, 0.78rem + 0.17vw, 0.9375rem); /* 13 → 15 px  lh 1.5  */
+  --step-0:  clamp(1rem,      0.96rem + 0.2vw,  1.125rem);  /* 16 → 18 px  lh 1.6  */
+  --step-1:  clamp(1.125rem,  1.05rem + 0.4vw,  1.375rem);  /* 18 → 22 px  lh 1.4  */
+  --step-2:  clamp(1.375rem,  1.2rem  + 0.8vw,  1.75rem);   /* 22 → 28 px  lh 1.25 */
+  --step-3:  clamp(1.75rem,   1.4rem  + 1.5vw,  2.5rem);    /* 28 → 40 px  lh 1.12 */
+  --step-4:  clamp(2.125rem,  1.55rem + 2.6vw,  3.5rem);    /* 34 → 56 px  lh 1.06 */
+  --step-5:  clamp(2.25rem,   1.45rem + 4vw,    4.5rem);    /* 36 → 72 px  lh 1.02 (el hero lo capa a 4rem) */
+
+  /* ---- Espacio ------------------------------------------------------------ */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 7rem;
+
+  /* ---- Radios: 4 / 8 / 14. Sin píldoras salvo el disco flotante. ---------- */
+  --radius-1: 4px;   /* chips, tags, inputs pequeños, marcador de paso */
+  --radius-2: 8px;   /* botones, tarjetas, inputs, cajón de precios del hero */
+  --radius-3: 14px;  /* solo: bloque de mensaje tecleado en contacto y og-image */
+
+  /* ---- Sombras: solo en hover de tarjeta, cajón móvil y flotante ---------- */
+  --shadow-1: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+  --shadow-2: 0 24px 48px -24px rgba(0, 0, 0, 0.7);
+
+  /* ---- Layout ------------------------------------------------------------- */
+  --container:   1160px;
+  --gutter:      clamp(1rem, 4vw, 2rem);
+  --section-gap: clamp(4rem, 9vw, 7rem);
+
+  /* ---- Movimiento --------------------------------------------------------- */
+  --dur-1: 140ms;  /* color, borde, opacidad de hover */
+  --dur-2: 260ms;  /* nav, cajón, FAQ, reveal corto */
+  --dur-3: 480ms;  /* reveal, fundidos */
+  --ease-out:    cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}

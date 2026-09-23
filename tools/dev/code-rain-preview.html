@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es-MX" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vista previa · lluvia de código</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="../../src/styles/00-tokens.css">
+  <link rel="stylesheet" href="../../src/styles/40-code-rain.css">
+  <style>
+    /* Solo para esta vista previa: lo mínimo de 10-base / 50-hero para juzgar la legibilidad del hero.
+       No es el CSS del sitio; esas hojas las escriben otros módulos. */
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg-0); color: var(--ink); font: 400 var(--step-0)/1.6 var(--font-body); }
+    .container { max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+    .nav-falsa { position: fixed; inset: 0 0 auto; height: 64px; display: flex; align-items: center; z-index: 50; }
+    .nav-falsa .container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+    .nav-falsa b { font: 700 var(--step-0)/1 var(--font-display); letter-spacing: -0.01em; }
+    .nav-falsa span { font: 500 var(--step--1)/1 var(--font-body); color: var(--ink-2); }
+    .hero { padding: 128px 0 96px; }
+    .hero__grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; align-items: start; }
+    .hero__copy { grid-column: 1 / span 8; }
+    .hero__precios { grid-column: 9 / span 4; }
+    .eyebrow { font: 500 var(--step--1)/1.5 var(--font-mono); letter-spacing: 0.02em; color: var(--accent); margin: 0 0 var(--space-4); }
+    .eyebrow::before { content: ""; display: inline-block; width: 0.55ch; height: 1em; background: var(--accent); vertical-align: -0.15em; margin-right: 0.5ch; }
+    h1 { font-family: var(--font-display); font-size: min(var(--step-5), 4rem); line-height: 1.02; letter-spacing: -0.025em; max-width: 20ch; margin: 0 0 var(--space-5); text-wrap: balance; font-optical-sizing: auto; }
+    h1 span { display: block; }
+    .h1-a { font-weight: 800; }
+    .h1-b { font-weight: 500; }
+    .lede { font-size: var(--step-1); line-height: 1.4; color: var(--ink-2); max-width: 52ch; margin: 0 0 var(--space-6); }
+    .cluster { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: var(--space-5); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; height: 52px; padding: 0 24px; border-radius: var(--radius-2); border: 1px solid transparent; font: 600 var(--step-0)/1 var(--font-body); text-decoration: none; color: inherit; }
+    .btn--wa { background: var(--wa); color: var(--wa-ink); }
+    .btn--ghost { border-color: var(--line-2); color: var(--ink); }
+    .meta { font: 400 var(--step--1)/1.5 var(--font-mono); color: var(--ink-3); margin: 0; }
+    .hero__precios { background: var(--bg-1); background: color-mix(in srgb, var(--bg-1) 86%, transparent); border: 1px solid var(--line); border-radius: var(--radius-2); padding: 20px 22px; }
+    .hero__precios header { display: flex; justify-content: space-between; font: 500 var(--step--1)/1.5 var(--font-mono); color: var(--ink-3); padding-bottom: 8px; border-bottom: 1px dashed var(--line-2); margin-bottom: 6px; }
+    .hero__precios .fila { display: flex; align-items: baseline; gap: 8px; min-height: 40px; padding: 6px 4px; font: 500 var(--step--1)/1.4 var(--font-body); color: var(--ink); text-decoration: none; }
+    .hero__precios .fila i { flex: 1; border-bottom: 1px dotted var(--line-2); transform: translateY(-4px); }
+    .hero__precios .fila b { font: 500 var(--step-0)/1 var(--font-mono); color: var(--ink-3); font-variant-numeric: tabular-nums; }
+    .relleno { padding: var(--section-gap) 0; min-height: 150vh; color: var(--ink-2); }
+    .relleno .container { border-top: 1px dashed var(--line-2); padding-top: var(--space-6); }
+    @media (max-width: 1023px) {
+      .hero__copy, .hero__precios { grid-column: 1 / -1; }
+    }
+    @media (max-width: 899px) {
+      .hero { padding-top: 104px; }
+      .nav-falsa { height: 56px; }
+    }
+    @media (max-width: 599px) {
+      h1 { text-wrap: pretty; }
+      .btn { width: 100%; }
+    }
+  </style>
+  <script>document.documentElement.classList.replace('no-js', 'js')</script>
+</head>
+<body>
+  <header class="nav-falsa" aria-hidden="true">
+    <div class="container"><b>ProgramadorMX</b><span>nav de relleno</span></div>
+  </header>
+  <main>
+    <section class="hero">
+      <canvas class="hero__canvas" data-code-rain data-density="1" data-intensity="1" aria-hidden="true"></canvas>
+      <div class="container">
+        <div class="hero__grid">
+          <div class="hero__copy">
+            <p class="eyebrow">apps y páginas web para negocios pequeños</p>
+            <h1><span class="h1-a">Tus clientes agendan y piden solos.</span> <span class="h1-b">Tú abres la app y ves tu día.</span></h1>
+            <p class="lede">Agenda de citas, pedidos por WhatsApp, menú digital QR o tu página web. Sin comisiones y con precio cerrado antes de empezar. Para barberías, taquerías, consultorios y tiendas de Tampico, Madero, Altamira y todo México.</p>
+            <div class="cluster">
+              <a class="btn btn--wa" href="#relleno">Cotizar por WhatsApp</a>
+              <a class="btn btn--ghost" href="#relleno">Ver precios</a>
+            </div>
+            <p class="meta">Te respondo yo, no un bot · [site.hours] · [site.city] y remoto a todo México</p>
+          </div>
+          <aside class="hero__precios" aria-label="Cajón de relleno para la vista previa">
+            <header><span>precios desde</span><span>MXN</span></header>
+            <a class="fila" href="#relleno"><span>Agenda de citas por WhatsApp</span><i></i><b>[precio_fmt]</b></a>
+            <a class="fila" href="#relleno"><span>Catálogo y pedidos por WhatsApp</span><i></i><b>[precio_fmt]</b></a>
+            <a class="fila" href="#relleno"><span>Menú digital QR</span><i></i><b>[precio_fmt]</b></a>
+            <a class="fila" href="#relleno"><span>Tarjeta de lealtad digital</span><i></i><b>[precio_fmt]</b></a>
+            <a class="fila" href="#relleno"><span>Inventario y corte del día</span><i></i><b>[precio_fmt]</b></a>
+            <a class="fila" href="#relleno"><span>Página web con botón de WhatsApp</span><i></i><b>[precio_fmt]</b></a>
+          </aside>
+        </div>
+      </div>
+    </section>
+    <section class="relleno" id="relleno">
+      <div class="container">
+        <p>Sección siguiente, de relleno: sirve para desplazar el hero fuera de pantalla y comprobar que la lluvia se pausa con IntersectionObserver.</p>
+      </div>
+    </section>
+  </main>
+  <script src="../../src/scripts/code-rain.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+dist/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+
+# Material de trabajo pesado o local: no se publica
+tools/dev/og/_chrome/
+tools/dev/og/**/*.png
+tools/dev/og/*.png
+tools/dev/screens/
+tools/dev/**/__pycache__/

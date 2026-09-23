@@ -1,0 +1,27 @@
+/* ==========================================================================
+   16-grano.css — grano de película sobre toda la página.
+   Une las fotos con las superficies planas y evita el bandeado que se ve
+   en los degradados oscuros. Es puramente decorativo: no captura el cursor.
+   Para quitarlo, borra este archivo.
+   ========================================================================== */
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;                 /* encima de la barra (50) y del flotante (40) */
+  pointer-events: none;
+  opacity: .05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* En pantallas de alta densidad el grano se ve el doble de fino: se agranda
+   el mosaico para que conserve el mismo tamaño aparente. */
+@media (min-resolution: 2dppx) {
+  body::after { background-size: 300px 300px; opacity: .042; }
+}
+
+/* El menú móvil abierto ya es una superficie sólida: el grano ahí estorba. */
+body.menu-open::after { opacity: .03; }

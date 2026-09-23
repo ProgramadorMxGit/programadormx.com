@@ -1,0 +1,117 @@
+[
+  {
+    "slug": "agenda-citas-whatsapp",
+    "nombre": "Agenda de citas por WhatsApp",
+    "corto": "Tus clientes agendan solos y les llega el recordatorio.",
+    "para_quien": ["barberías", "salones", "uñas", "consultorios", "dentistas"],
+    "incluye": [
+      "Horarios y servicios que tú defines",
+      "Confirmación y recordatorio por WhatsApp",
+      "Vista del día para ti y tu equipo",
+      "Lista de clientes con historial"
+    ],
+    "precio_desde": 7900,
+    "entrega": "2 semanas",
+    "mensaje_whatsapp": "Hola, quiero la agenda de citas por WhatsApp para mi negocio.",
+    "keyword": "app para agendar citas por whatsapp",
+    "icon": "calendar",
+    "landing_path": "/app-agendar-citas-whatsapp/",
+    "destacado": true,
+    "imagen_alt": "Ejemplo: un barbero revisa en su celular las citas de hoy mientras su cliente espera en el sillón"
+  },
+  {
+    "slug": "pedidos-whatsapp",
+    "nombre": "Catálogo y pedidos por WhatsApp",
+    "corto": "Tu catálogo con fotos; el pedido te llega armado al WhatsApp.",
+    "para_quien": ["abarrotes", "taquerías", "papelerías", "tiendas de ropa"],
+    "incluye": [
+      "Productos con foto, precio y existencia",
+      "Carrito que arma el mensaje de WhatsApp",
+      "Sin comisión por pedido: la app es tuya",
+      "Promociones y horarios de entrega"
+    ],
+    "precio_desde": 8900,
+    "entrega": "2 a 3 semanas",
+    "mensaje_whatsapp": "Hola, quiero el catálogo con pedidos por WhatsApp para mi negocio.",
+    "keyword": "app para tienda de abarrotes",
+    "icon": "cart",
+    "destacado": true,
+    "imagen_alt": "Ejemplo: la dueña de una tienda de abarrotes ve un pedido nuevo en su celular mientras mete el pan en la bolsa"
+  },
+  {
+    "slug": "menu-digital-qr",
+    "nombre": "Menú digital QR",
+    "corto": "Un QR en la mesa; el menú siempre al día desde tu celular.",
+    "para_quien": ["restaurantes", "cafeterías", "food trucks"],
+    "incluye": [
+      "Menú con fotos, precios y platillos del día",
+      "Lo editas desde tu celular en un minuto",
+      "QR listo para imprimir",
+      "Botón para pedir o reservar por WhatsApp"
+    ],
+    "precio_desde": 3900,
+    "entrega": "1 semana",
+    "mensaje_whatsapp": "Hola, quiero el menú digital QR para mi restaurante.",
+    "keyword": "menu digital qr",
+    "icon": "qr",
+    "destacado": false,
+    "imagen_alt": "Ejemplo: en una fonda, un cliente ve el menú en su celular después de escanear el QR de la mesa"
+  },
+  {
+    "slug": "tarjeta-lealtad",
+    "nombre": "Tarjeta de lealtad digital",
+    "corto": "Sellos por visita con QR y premio al completar.",
+    "para_quien": ["cafés", "autolavados", "barberías"],
+    "incluye": [
+      "Sello por visita escaneando un QR",
+      "Premio automático al completar",
+      "Lista de clientes frecuentes",
+      "Aviso por WhatsApp cuando les falta poco"
+    ],
+    "precio_desde": 5900,
+    "entrega": "1 a 2 semanas",
+    "mensaje_whatsapp": "Hola, quiero la tarjeta de lealtad digital para mi negocio.",
+    "keyword": "tarjeta de lealtad digital",
+    "icon": "stamp",
+    "destacado": false,
+    "imagen_alt": "Ejemplo: una clienta enseña su tarjeta de sellos en el celular mientras le entregan su café"
+  },
+  {
+    "slug": "inventario-ventas",
+    "nombre": "Inventario y corte del día",
+    "corto": "Entradas, salidas y corte de caja sin cuaderno.",
+    "para_quien": ["tiendas pequeñas", "talleres", "gimnasios"],
+    "incluye": [
+      "Entradas, salidas y existencias",
+      "Corte de caja diario en un toque",
+      "Aviso de producto por agotarse",
+      "Reporte semanal por WhatsApp"
+    ],
+    "precio_desde": 9900,
+    "entrega": "3 semanas",
+    "mensaje_whatsapp": "Hola, quiero la app de inventario y corte del día para mi negocio.",
+    "keyword": "app de inventario y ventas",
+    "icon": "boxes",
+    "destacado": false,
+    "imagen_alt": "Ejemplo: el encargado de una ferretería revisa el inventario en su celular frente al anaquel"
+  },
+  {
+    "slug": "pagina-web",
+    "nombre": "Página web con botón de WhatsApp",
+    "corto": "Para que te encuentren en Google y te escriban.",
+    "para_quien": ["cualquier negocio que quiera aparecer en Google"],
+    "incluye": [
+      "Hasta 5 secciones con tus fotos y precios",
+      "Botón de WhatsApp en todo momento",
+      "Lista para Google y para compartir",
+      "Se ve bien en celular"
+    ],
+    "precio_desde": 4900,
+    "entrega": "1 semana",
+    "mensaje_whatsapp": "Hola, quiero una página web con WhatsApp para mi negocio.",
+    "keyword": "pagina web con boton de whatsapp",
+    "icon": "globe",
+    "destacado": false,
+    "imagen_alt": "Ejemplo: la dueña de un salón de belleza revisa la página de su negocio en la laptop de la recepción"
+  }
+]

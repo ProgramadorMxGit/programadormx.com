@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<title>Pantallas de las fotos v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+  :root {
+    --bg: #f5f5f4; --card: #ffffff; --ink: #0c0d10; --ink-2: #5d616c; --ink-3: #8f939c;
+    --line: #e8e8ea; --accent: #5a63e8; --accent-soft: #eef0ff; --ok: #12a150; --ok-soft: #e7f7ee;
+    --warn: #e5484d; --warn-soft: #fdecec; --dark: #0c0d10;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #d9d9dc; font-family: "Geist", system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  body { display: flex; flex-wrap: wrap; gap: 40px; padding: 40px; }
+  .screen { width: 390px; height: 844px; background: var(--bg); position: relative; overflow: hidden; flex: none; }
+  .solo body, body.solo { padding: 0; gap: 0; background: var(--bg); }
+  body.solo .screen, body.solo .web { display: none; }
+  body.solo .screen.on, body.solo .web.on { display: block; }
+
+  .status { height: 50px; padding: 18px 30px 0; display: flex; justify-content: space-between; font-weight: 600; font-size: 16px; letter-spacing: -.2px; }
+  .status .icons { display: flex; gap: 6px; align-items: center; }
+  .status svg { height: 12px; }
+  .pad { padding: 0 22px; }
+
+  .top { display: flex; align-items: center; justify-content: space-between; margin: 14px 0 22px; }
+  .biz { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; letter-spacing: -.2px; }
+  .mono { width: 34px; height: 34px; border-radius: 11px; background: var(--dark); color: #fff; display: grid; place-items: center; font-size: 13px; font-weight: 600; letter-spacing: .3px; }
+  .round { width: 38px; height: 38px; border-radius: 50%; background: var(--card); border: 1px solid var(--line); display: grid; place-items: center; }
+  .round svg { width: 18px; height: 18px; stroke: var(--ink); fill: none; stroke-width: 1.8; }
+
+  h1 { font-size: 38px; line-height: 1.02; font-weight: 600; letter-spacing: -1.6px; }
+  .sub { font-size: 15px; color: var(--ink-2); margin-top: 8px; letter-spacing: -.1px; }
+
+  .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; padding: 6px 11px; border-radius: 99px; letter-spacing: -.1px; white-space: nowrap; }
+  .chip.ok { background: var(--ok-soft); color: #0b7a3c; }
+  .chip.ok::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--ok); }
+  .chip.wait { background: #f1f1f3; color: var(--ink-2); }
+  .chip.warn { background: var(--warn-soft); color: #c4262c; }
+  .chip.acc { background: var(--accent-soft); color: #3d45c9; }
+
+  .card { background: var(--card); border-radius: 22px; border: 1px solid var(--line); }
+  .btn { height: 56px; border-radius: 18px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 17px; font-weight: 600; letter-spacing: -.2px; }
+  .btn.dark { background: var(--dark); color: #fff; }
+  .btn.acc { background: var(--accent); color: #fff; }
+  .btn.ghost { background: var(--card); border: 1px solid var(--line); color: var(--ink); }
+  .bottom { position: absolute; left: 22px; right: 22px; bottom: 34px; }
+  .home { position: absolute; bottom: 9px; left: 50%; width: 134px; height: 5px; border-radius: 3px; background: var(--ink); transform: translateX(-50%); }
+
+  /* ---------- 1 · Agenda ---------- */
+  .next { background: var(--dark); color: #fff; border-radius: 26px; padding: 22px; margin: 24px 0 14px; position: relative; overflow: hidden; }
+  .next::after { content: ""; position: absolute; right: -60px; top: -60px; width: 190px; height: 190px; border-radius: 50%; background: radial-gradient(circle, #5a63e866, transparent 70%); }
+  .next .lbl { font-size: 13px; color: #a3a7b3; font-weight: 500; }
+  .next .hora { font-size: 52px; font-weight: 600; letter-spacing: -2.4px; line-height: 1; margin-top: 10px; }
+  .next .quien { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 14px; }
+  .next .quien b { font-size: 21px; font-weight: 600; letter-spacing: -.5px; display: block; }
+  .next .quien span { font-size: 14px; color: #a3a7b3; }
+  .next .chip.ok { background: #12a15033; color: #5ee29a; }
+  .list .row { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-bottom: 1px solid var(--line); }
+  .list .row:last-child { border-bottom: 0; }
+  .t { font-size: 17px; font-weight: 600; letter-spacing: -.4px; width: 52px; }
+  .who { flex: 1; }
+  .who b { font-size: 17px; font-weight: 600; letter-spacing: -.3px; display: block; }
+  .who span { font-size: 14px; color: var(--ink-2); }
+
+.week { display: flex; gap: 8px; margin-top: 20px; }
+  .week span { flex: 1; height: 62px; border-radius: 16px; background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; color: var(--ink-3); font-weight: 500; }
+  .week span b { font-size: 18px; color: var(--ink); font-weight: 600; letter-spacing: -.4px; }
+  .week span.on { background: var(--accent); border-color: var(--accent); color: #dfe2ff; }
+  .week span.on b { color: #fff; }
+  .next { margin-top: 16px !important; }
+  .nota { padding: 14px 18px; margin-top: 12px; font-size: 15px; color: var(--ink-2); display: flex; gap: 10px; }
+  .nota b { color: var(--ink); font-weight: 600; }
+  .dos { display: grid; grid-template-columns: 1fr 1.6fr; gap: 10px; }
+
+  /* ---------- 2 · Pedido ---------- */
+  .src { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); margin-top: 10px; }
+  .src i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px #12a15022; }
+  .cliente { display: flex; align-items: center; gap: 14px; padding: 16px 18px; margin: 22px 0 12px; }
+  .cliente .av { width: 46px; height: 46px; border-radius: 50%; background: var(--accent-soft); color: #3d45c9; display: grid; place-items: center; font-size: 19px; font-weight: 600; }
+  .cliente b { font-size: 19px; letter-spacing: -.4px; display: block; }
+  .cliente span { font-size: 14px; color: var(--ink-2); }
+  .items .it { display: flex; align-items: baseline; gap: 12px; padding: 14px 18px; font-size: 17px; letter-spacing: -.3px; }
+  .items .it + .it { border-top: 1px solid var(--line); }
+  .items .q { font-weight: 600; width: 26px; color: var(--accent); }
+  .items .n { flex: 1; }
+  .items .p { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .total { display: flex; justify-content: space-between; align-items: baseline; padding: 18px 4px 0; }
+  .total span { font-size: 15px; color: var(--ink-2); }
+  .total b { font-size: 40px; font-weight: 600; letter-spacing: -1.8px; }
+
+  /* ---------- 3 · Menú ---------- */
+  .tabs { display: flex; gap: 8px; margin: 22px 0 18px; }
+  .tabs span { font-size: 15px; font-weight: 600; padding: 10px 16px; border-radius: 99px; background: var(--card); border: 1px solid var(--line); color: var(--ink-2); letter-spacing: -.2px; }
+  .tabs span.on { background: var(--dark); color: #fff; border-color: var(--dark); }
+  .dish { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 18px 20px; }
+  .dish + .dish { border-top: 1px solid var(--line); }
+  .dish b { font-family: "Instrument Serif", serif; font-weight: 400; font-size: 27px; letter-spacing: -.3px; line-height: 1.05; display: block; }
+  .dish span { font-size: 14px; color: var(--ink-2); display: block; margin-top: 5px; }
+  .dish em { font-style: normal; font-size: 19px; font-weight: 600; letter-spacing: -.4px; font-variant-numeric: tabular-nums; padding-top: 4px; }
+  .dia { display: flex; align-items: center; justify-content: space-between; background: var(--accent-soft); border-radius: 18px; padding: 14px 18px; margin-bottom: 12px; }
+  .dia b { font-size: 16px; color: #2e35b3; letter-spacing: -.2px; }
+  .dia span { font-size: 16px; font-weight: 600; color: #2e35b3; }
+
+  /* ---------- 4 · Lealtad ---------- */
+  .loyal { background: var(--dark); color: #fff; border-radius: 28px; padding: 26px 24px 28px; margin-top: 26px; position: relative; overflow: hidden; }
+  .loyal::before { content: ""; position: absolute; left: -80px; bottom: -120px; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, #5a63e855, transparent 70%); }
+  .loyal .lbl { font-size: 14px; color: #a3a7b3; display: flex; justify-content: space-between; }
+  .loyal .big { font-size: 64px; font-weight: 600; letter-spacing: -3px; line-height: 1; margin: 18px 0 4px; }
+  .loyal .big small { font-size: 26px; color: #a3a7b3; letter-spacing: -.8px; font-weight: 500; }
+  .stamps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 24px; position: relative; }
+  .stamps i { aspect-ratio: 1; border-radius: 50%; border: 1.5px dashed #4a4d57; display: grid; place-items: center; }
+  .stamps i.f { background: var(--accent); border: 0; }
+  .stamps i.f svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 1.8; }
+  .falta { font-size: 16px; margin-top: 22px; color: #d7d9e0; position: relative; letter-spacing: -.2px; }
+  .falta b { color: #fff; }
+  .visit { display: flex; justify-content: space-between; align-items: center; padding: 16px 18px; font-size: 16px; letter-spacing: -.2px; }
+  .visit + .visit { border-top: 1px solid var(--line); }
+  .visit span { color: var(--ink-2); font-size: 14px; }
+
+  /* ---------- 5 · Inventario ---------- */
+  .search { display: flex; align-items: center; gap: 10px; height: 50px; padding: 0 16px; margin: 22px 0 14px; font-size: 16px; color: var(--ink-3); }
+  .search svg { width: 18px; height: 18px; stroke: var(--ink-3); fill: none; stroke-width: 2; }
+  .kpi { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .kpi div { padding: 16px 18px; }
+  .kpi span { font-size: 13px; color: var(--ink-2); display: block; }
+  .kpi b { font-size: 28px; font-weight: 600; letter-spacing: -1.2px; display: block; margin-top: 6px; }
+  .kpi .bad b { color: #c4262c; }
+  .stock .row { display: flex; align-items: center; gap: 12px; padding: 16px 18px; }
+  .stock .row + .row { border-top: 1px solid var(--line); }
+  .stock .row b { flex: 1; font-size: 17px; font-weight: 600; letter-spacing: -.3px; }
+  .stock .row em { font-style: normal; font-size: 20px; font-weight: 600; letter-spacing: -.6px; font-variant-numeric: tabular-nums; min-width: 34px; text-align: right; }
+
+  /* ---------- 6 · Web del salón (laptop) ---------- */
+  .web { width: 1440px; height: 900px; background: #fbf8f6; position: relative; overflow: hidden; flex: none; font-family: "Geist", sans-serif; }
+  .web nav { height: 88px; display: flex; align-items: center; justify-content: space-between; padding: 0 72px; }
+  .web .logo { font-family: "Instrument Serif", serif; font-size: 34px; letter-spacing: -.4px; }
+  .web nav .links { display: flex; gap: 40px; font-size: 17px; color: #5d565a; }
+  .web nav .cta { background: #1a1416; color: #fff; padding: 14px 24px; border-radius: 99px; font-size: 16px; font-weight: 600; }
+  .web .hero { display: grid; grid-template-columns: 1fr 560px; gap: 64px; padding: 64px 72px 0; align-items: center; }
+  .web .kick { font-size: 15px; font-weight: 600; letter-spacing: 2px; color: #b0527a; }
+  .web h2 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: 132px; line-height: .9; letter-spacing: -3px; margin-top: 22px; color: #1a1416; }
+  .web h2 em { font-style: italic; color: #b0527a; }
+  .web .lead { font-size: 26px; color: #5d565a; margin-top: 28px; letter-spacing: -.3px; }
+  .web .acts { display: flex; gap: 16px; margin-top: 44px; }
+  .web .acts a { height: 64px; padding: 0 32px; border-radius: 99px; display: flex; align-items: center; font-size: 19px; font-weight: 600; }
+  .web .acts .p { background: #b0527a; color: #fff; }
+  .web .acts .s { border: 1.5px solid #d9cfd2; color: #1a1416; }
+  .web .foto { height: 660px; border-radius: 40px; background: #eadfdc url("https://images.unsplash.com/photo-1779350676620-fde279b1d023?w=1400&q=82&fit=crop") center 70%/cover; position: relative; }
+  .web .badge { position: absolute; left: -40px; bottom: 60px; background: #fff; border-radius: 22px; padding: 18px 22px; box-shadow: 0 20px 50px #1a141622; }
+  .web .badge b { font-size: 30px; letter-spacing: -1px; display: block; }
+  .web .badge span { font-size: 15px; color: #5d565a; }
+</style>
+</head>
+<body>
+
+<!-- 1 · Agenda de citas (barbería) -->
+<section class="screen" id="s1">
+  <div class="status"><span>9:41</span><span class="icons"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="currentColor"/><rect x="2" y="2" width="17" height="8" rx="2"/><rect x="24" y="4" width="2" height="4" rx="1"/></svg></span></div>
+  <div class="pad">
+    <div class="top"><div class="biz"><span class="mono">DB</span>Barbería Don Beto</div><span class="round"><svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 0 0 4 0"/></svg></span></div>
+    <h1>Citas de hoy</h1>
+    <p class="sub">Martes 23 · 8 citas</p>
+    <div class="week"><span>Lun<b>22</b></span><span class="on">Mar<b>23</b></span><span>Mié<b>24</b></span><span>Jue<b>25</b></span><span>Vie<b>26</b></span></div>
+    <div class="next">
+      <div class="lbl">Siguiente cita · en 12 min</div>
+      <div class="hora">10:30</div>
+      <div class="quien"><div><b>Daniel</b><span>Corte + barba</span></div><span class="chip ok">Confirmada</span></div>
+    </div>
+    <div class="card list">
+      <div class="row"><span class="t">11:15</span><div class="who"><b>Luis</b><span>Corte clásico</span></div><span class="chip ok">Confirmada</span></div>
+      <div class="row"><span class="t">12:00</span><div class="who"><b>Carlos</b><span>Barba</span></div><span class="chip wait">Pendiente</span></div>
+      <div class="row"><span class="t">12:45</span><div class="who"><b>Jorge</b><span>Degradado</span></div><span class="chip ok">Confirmada</span></div>
+    </div>
+  </div>
+  <div class="bottom"><div class="btn acc">+ Nueva cita</div></div>
+  <span class="home"></span>
+</section>
+
+<!-- 2 · Pedido por WhatsApp (abarrotes) -->
+<section class="screen" id="s2">
+  <div class="status"><span>9:41</span><span class="icons"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="currentColor"/><rect x="2" y="2" width="17" height="8" rx="2"/><rect x="24" y="4" width="2" height="4" rx="1"/></svg></span></div>
+  <div class="pad">
+    <div class="top"><div class="biz"><span class="mono">LE</span>Abarrotes La Esquina</div><span class="chip acc">#0012</span></div>
+    <h1>Pedido nuevo</h1>
+    <div class="src"><i></i>Llegó por WhatsApp · hace 2 min</div>
+    <div class="card cliente"><span class="av">M</span><div><b>Mari</b><span>Para recoger · 1:30 pm</span></div></div>
+    <div class="card items">
+      <div class="it"><span class="q">2</span><span class="n">Leche 1 L</span><span class="p">$58</span></div>
+      <div class="it"><span class="q">1</span><span class="n">Pan de caja</span><span class="p">$52</span></div>
+      <div class="it"><span class="q">1</span><span class="n">Huevo 1 kg</span><span class="p">$48</span></div>
+      <div class="it"><span class="q">2</span><span class="n">Frijol 1 kg</span><span class="p">$82</span></div>
+    </div>
+    <div class="card nota"><b>Nota:</b> Pan integral, por favor</div>
+    <div class="total"><span>Total</span><b>$240</b></div>
+  </div>
+  <div class="bottom dos"><div class="btn ghost">Escribir</div><div class="btn dark">Aceptar pedido</div></div>
+  <span class="home"></span>
+</section>
+
+<!-- 3 · Menú digital (fonda) -->
+<section class="screen" id="s3">
+  <div class="status"><span>9:41</span><span class="icons"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="currentColor"/><rect x="2" y="2" width="17" height="8" rx="2"/><rect x="24" y="4" width="2" height="4" rx="1"/></svg></span></div>
+  <div class="pad">
+    <div class="top"><div class="biz"><span class="mono">DL</span>Fonda Doña Lupe</div><span class="chip wait">Mesa 4</span></div>
+    <h1>Menú</h1>
+    <div class="tabs"><span class="on">Comida</span><span>Desayunos</span><span>Bebidas</span></div>
+    <div class="dia"><b>Comida corrida</b><span>$95</span></div>
+    <div class="card">
+      <div class="dish"><div><b>Enchiladas</b><span>Verdes, con pollo y crema</span></div><em>$85</em></div>
+      <div class="dish"><div><b>Chilaquiles</b><span>Rojos, con huevo o pollo</span></div><em>$75</em></div>
+      <div class="dish"><div><b>Caldo de res</b><span>Con verduras y arroz</span></div><em>$90</em></div>
+      <div class="dish"><div><b>Agua fresca</b><span>Jamaica u horchata</span></div><em>$25</em></div>
+    </div>
+  </div>
+  <div class="bottom"><div class="btn dark">Ver mi pedido · 2</div></div>
+  <span class="home"></span>
+</section>
+
+<!-- 4 · Tarjeta de lealtad (cafetería) -->
+<section class="screen" id="s4">
+  <div class="status"><span>9:41</span><span class="icons"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="currentColor"/><rect x="2" y="2" width="17" height="8" rx="2"/><rect x="24" y="4" width="2" height="4" rx="1"/></svg></span></div>
+  <div class="pad">
+    <div class="top"><div class="biz"><span class="mono">CE</span>Café La Esquina</div><span class="round"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v7h-7"/></svg></span></div>
+    <h1>Tus sellos</h1>
+    <div class="loyal">
+      <div class="lbl"><span>Ana · Cliente frecuente</span><span>2026</span></div>
+      <div class="big">7 <small>de 10</small></div>
+      <div class="stamps">
+        <i class="f"><svg viewBox="0 0 24 24"><path d="M4 9h13v5a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/></svg></i><i class="f"><svg viewBox="0 0 24 24"><path d="M4 9h13v5a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/></svg></i><i class="f"><svg viewBox="0 0 24 24"><path d="M4 9h13v5a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/></svg></i><i class="f"><svg viewBox="0 0 24 24"><path d="M4 9h13v5a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/></svg></i><i class="f"><svg viewBox="0 0 24 24"><path d="M4 9h13v5a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/></svg></i>
+        <i class="f"><svg viewBox="0 0 24 24"><path d="M4 9h13v5a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/></svg></i><i class="f"><svg viewBox="0 0 24 24"><path d="M4 9h13v5a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/></svg></i><i></i><i></i><i></i>
+      </div>
+      <p class="falta">Te faltan <b>3</b> para tu café gratis</p>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="visit">Americano <span>Hoy · 9:12</span></div>
+      <div class="visit">Capuchino <span>Lunes · 8:47</span></div>
+    </div>
+  </div>
+  <div class="bottom"><div class="btn acc">Mostrar mi código</div></div>
+  <span class="home"></span>
+</section>
+
+<!-- 5 · Inventario (ferretería) -->
+<section class="screen" id="s5">
+  <div class="status"><span>9:41</span><span class="icons"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2" width="3" height="10" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="currentColor"/><rect x="2" y="2" width="17" height="8" rx="2"/><rect x="24" y="4" width="2" height="4" rx="1"/></svg></span></div>
+  <div class="pad">
+    <div class="top"><div class="biz"><span class="mono">ET</span>Ferretería El Tornillo</div><span class="round"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></div>
+    <h1>Inventario</h1>
+    <div class="card search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Buscar producto</div>
+    <div class="kpi"><div class="card"><span>Vendido hoy</span><b>$2,480</b></div><div class="card bad"><span>Por surtir</span><b>2</b></div></div>
+    <div class="card stock">
+      <div class="row"><b>Tornillo 1/4"</b><em>32</em></div>
+      <div class="row"><b>Brocha 2"</b><span class="chip warn">Bajo</span><em>5</em></div>
+      <div class="row"><b>Cinta aislante</b><em>18</em></div>
+      <div class="row"><b>Llave 3/8"</b><span class="chip warn">Bajo</span><em>3</em></div>
+      <div class="row"><b>Pija 8 × 1"</b><em>140</em></div>
+      <div class="row"><b>Foco LED 9 W</b><em>24</em></div>
+    </div>
+  </div>
+  <div class="bottom"><div class="btn dark">Registrar venta</div></div>
+  <span class="home"></span>
+</section>
+
+<!-- 6 · Página web del salón (laptop) -->
+<section class="web" id="s6">
+  <nav><span class="logo">Estética Luna</span><span class="links"><span>Servicios</span><span>Precios</span><span>Ubicación</span></span><span class="cta">Agenda tu cita</span></nav>
+  <div class="hero">
+    <div>
+      <p class="kick">ALTAMIRA · DESDE 2014</p>
+      <h2>Estética <em>Luna</em></h2>
+      <p class="lead">Corte, color y uñas</p>
+      <div class="acts"><a class="p">Agenda tu cita</a><a class="s">Ver precios</a></div>
+    </div>
+    <div class="foto"><div class="badge"><b>4.9 ★</b><span>312 reseñas</span></div></div>
+  </div>
+</section>
+
+<script>
+  const s = new URLSearchParams(location.search).get('s');
+  if (s) { document.body.classList.add('solo'); document.getElementById('s' + s).classList.add('on'); }
+</script>
+</body>
+</html>

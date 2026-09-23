@@ -1,0 +1,23 @@
+{
+  "name": "ProgramadorMX",
+  "url": "https://programadormx.com",
+  "tagline": "Apps sencillas para tu negocio",
+  "description": "Apps móviles y páginas web sencillas para negocios pequeños en México: citas, pedidos y menú digital por WhatsApp, sin comisiones y con precio claro.",
+  "whatsapp": "5218331080178",
+  "whatsapp_display": "833 108 0178",
+  "whatsapp_message": "Hola, vi programadormx.com y quiero una app para mi negocio.",
+  "email": "yon.dev.official@gmail.com",
+  "owner_name": "",
+  "city": "Ciudad Madero, Tamaulipas",
+  "service_area": ["Tampico", "Ciudad Madero", "Altamira", "México (remoto)"],
+  "hours": "Lunes a viernes, 9:00 a 18:00 (centro de México)",
+  "social": {
+    "facebook": "https://www.facebook.com/ProgramadorMX",
+    "instagram": "https://www.instagram.com/programadormx/",
+    "tiktok": "https://www.tiktok.com/@yohanescobarmx",
+    "youtube": "https://www.youtube.com/@programadormx"
+  },
+  "ga4_id": "",
+  "monthly_plan": { "price": 249, "label": "Hosting, dominio y soporte" },
+  "theme_color": "#0A0B0D"
+}

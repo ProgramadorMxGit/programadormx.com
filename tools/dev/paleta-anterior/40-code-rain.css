@@ -1,0 +1,41 @@
+/* ==========================================================================
+   40-code-rain.css — fondo de lluvia de código del hero (DESIGN.md §4.6)
+   Posee solo: el contenedor .hero (posición, aislamiento, desborde, fondo),
+   .hero__canvas, el orden de capas de .hero > .container y el respaldo sin JS.
+   Padding, retícula y contenido del hero viven en 50-hero.css.
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  /* Mismo color que pinta el canvas: no hay flash antes del primer cuadro. */
+  background: var(--bg-0);
+}
+
+.hero__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* Fundidos bajo la nav (96 px) y hacia la siguiente sección (140 px): en CSS, no por cuadro. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 96px, #000 calc(100% - 140px), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 96px, #000 calc(100% - 140px), transparent 100%);
+}
+
+.hero > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Sin JS no hay quien pinte el canvas: papel rayado con la hairline para que el hero nunca quede plano. */
+html.no-js .hero {
+  background-image: repeating-linear-gradient(180deg, var(--line) 0 1px, transparent 1px 22px);
+}
+
+html.no-js .hero__canvas {
+  display: none;
+}

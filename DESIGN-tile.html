@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#15120F">
+<title>Lámina de estilo · Código de mostrador · programadormx.online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* ===== Tokens (copia de src/styles/00-tokens.css) ===== */
+:root {
+  color-scheme: dark;
+  --bg-0: #15120F; --bg-1: #1C1814; --bg-2: #241F1A; --bg-3: #2E2823;
+  --ink: #F4EEE6; --ink-2: #BDB3A7; --ink-3: #9C938A;
+  --line: #2A241F; --line-2: #726B61;
+  --accent: #F0A63C; --accent-ink: #1C1206; --accent-2: #7FB8C9; --accent-soft: #33240F;
+  --ok: #7CC48B; --warn: #E8785A;
+  --wa: #25D366; --wa-ink: #072D16;
+  --font-display: "Bricolage Grotesque", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "Cascadia Mono", Consolas, "Roboto Mono", Menlo, monospace;
+  --step--1: clamp(0.8125rem, 0.78rem + 0.17vw, 0.9375rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --step-1: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  --step-2: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
+  --step-3: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+  --step-4: clamp(2.125rem, 1.55rem + 2.6vw, 3.5rem);
+  --step-5: clamp(2.25rem, 1.45rem + 4vw, 4.5rem);
+  --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem; --space-5: 1.5rem;
+  --space-6: 2rem; --space-7: 3rem; --space-8: 4.5rem; --space-9: 7rem;
+  --radius-1: 4px; --radius-2: 8px; --radius-3: 14px;
+  --shadow-1: 0 1px 0 rgba(255,255,255,.04) inset, 0 8px 24px -12px rgba(0,0,0,.6);
+  --shadow-2: 0 24px 48px -24px rgba(0,0,0,.7);
+  --container: 1160px; --gutter: clamp(1rem, 4vw, 2rem); --section-gap: clamp(4rem, 9vw, 7rem);
+  --dur-1: 140ms; --dur-2: 260ms; --dur-3: 480ms;
+  --ease-out: cubic-bezier(.2,.7,.2,1); --ease-in-out: cubic-bezier(.65,0,.35,1);
+}
+
+/* ===== Base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-optical-sizing: auto; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg-0); color: var(--ink);
+  font: 400 var(--step-0)/1.6 var(--font-body);
+  -webkit-font-smoothing: antialiased; overflow-x: clip;
+}
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; }
+.container { max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--ink-3); }
+
+/* Lámina: secciones de muestra */
+.sheet { padding-block: var(--space-7); border-top: 1px dashed var(--line-2); }
+.sheet__title { font: 600 var(--step-1)/1.3 var(--font-display); margin-bottom: var(--space-2); }
+.sheet__note { color: var(--ink-2); max-width: 62ch; margin-bottom: var(--space-5); font-size: var(--step--1); }
+.sheet__label { font: 500 var(--step--1)/1.5 var(--font-mono); color: var(--ink-3); margin-bottom: var(--space-2); }
+
+/* Eyebrow con cursor de bloque */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: .5ch;
+  font: 500 var(--step--1)/1.5 var(--font-mono); letter-spacing: .02em; color: var(--accent);
+}
+.eyebrow::before { content: ""; display: inline-block; width: .55ch; height: 1em; background: var(--accent); }
+
+/* ===== Botones ===== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  height: 44px; padding: 0 18px; border-radius: var(--radius-2); border: 1px solid transparent;
+  font: 600 var(--step-0)/1 var(--font-body); text-decoration: none; cursor: pointer; white-space: nowrap;
+  transition: background-color var(--dur-1) var(--ease-out), border-color var(--dur-1) var(--ease-out),
+              color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out), filter var(--dur-1) var(--ease-out);
+}
+.btn svg { width: 20px; height: 20px; flex: none; }
+.btn--sm { height: 36px; padding: 0 14px; font-size: var(--step--1); }
+.btn--sm svg { width: 18px; height: 18px; }
+.btn--lg { height: 52px; padding: 0 24px; }
+.btn:hover, .btn.is-hover { transform: translateY(-1px); }
+.btn:active, .btn.is-active { transform: translateY(0) scale(.99); }
+.btn:focus-visible, .btn.is-focus { outline: 2px solid var(--accent); outline-offset: 3px; }
+.btn--primary { background: var(--ink); color: var(--bg-0); }
+.btn--primary:hover, .btn--primary.is-hover { filter: brightness(1.04); }
+.btn--ghost { background: transparent; border-color: var(--line-2); color: var(--ink); }
+.btn--ghost:hover, .btn--ghost.is-hover { background: var(--bg-1); border-color: var(--ink-3); }
+.btn--wa { background: var(--wa); color: var(--wa-ink); }
+.btn--wa:hover, .btn--wa.is-hover { filter: brightness(1.06); }
+.wa-float {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 56px; height: 56px; border-radius: 50%; background: var(--wa); color: var(--wa-ink); box-shadow: var(--shadow-1);
+}
+.wa-float svg { width: 28px; height: 28px; }
+.wa-float.is-focus { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* ===== Tarjeta ===== */
+.card {
+  background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--radius-2);
+  padding: 24px; display: grid; gap: 14px; max-width: 360px; transition: transform 160ms var(--ease-out), border-color 160ms, box-shadow 160ms;
+}
+.card--destacado { border-top: 2px solid var(--accent); }
+.card--lift:hover { transform: translateY(-2px); border-color: var(--line-2); box-shadow: var(--shadow-1); }
+.card__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.card__icon { width: 40px; height: 40px; border-radius: 6px; background: var(--bg-2); color: var(--accent-2); display: grid; place-items: center; flex: none; }
+.card__icon svg { width: 24px; height: 24px; }
+.card__title { font: 600 var(--step-1)/1.3 var(--font-display); }
+.card__corto { color: var(--ink-2); }
+.card__incluye { list-style: none; display: grid; gap: 4px; color: var(--ink-2); font-size: var(--step--1); }
+.card__incluye li::before { content: "+"; font-family: var(--font-mono); color: var(--accent); margin-right: 8px; }
+.card__meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.price { display: inline-flex; align-items: baseline; gap: 6px; }
+.price__from { font: 500 var(--step--1)/1 var(--font-mono); color: var(--accent); }
+.price__amount { font: 700 var(--step-2)/1 var(--font-display); font-variant-numeric: tabular-nums; color: var(--ink); }
+.price__currency { font: 400 var(--step--1)/1 var(--font-mono); color: var(--ink-3); }
+.chip {
+  display: inline-flex; align-items: center; height: 26px; padding: 0 8px; border-radius: var(--radius-1);
+  background: var(--bg-2); border: 1px solid var(--line); color: var(--ink-2);
+  font: 500 var(--step--1)/1 var(--font-mono); font-variant-numeric: tabular-nums;
+}
+.chip--accent { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+.tag { font: 400 var(--step--1)/1.5 var(--font-mono); color: var(--ink-3); text-align: right; }
+
+/* ===== FAQ ===== */
+.faq { max-width: 720px; }
+.faq details { border-bottom: 1px dashed var(--line-2); }
+.faq details:first-child { border-top: 1px dashed var(--line-2); }
+.faq summary {
+  list-style: none; cursor: pointer; position: relative; padding: 20px 40px 20px 0;
+  font: 600 var(--step-1)/1.3 var(--font-display); color: var(--ink); text-wrap: balance;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+"; position: absolute; right: 4px; top: 18px;
+  font: 400 var(--step-1)/1 var(--font-mono); color: var(--ink-3); transition: transform 160ms var(--ease-out), color 160ms;
+}
+.faq details[open] summary { color: var(--accent); }
+.faq details[open] summary::after { transform: rotate(45deg); color: var(--accent); }
+.faq summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.faq__body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--dur-2) var(--ease-out); }
+.faq details[open] .faq__body { grid-template-rows: 1fr; }
+.faq__body > div { overflow: hidden; }
+.faq__body p { color: var(--ink-2); max-width: 62ch; padding-bottom: 20px; }
+
+/* ===== Paleta ===== */
+.palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.swatch { border: 1px solid var(--line); border-radius: var(--radius-2); overflow: hidden; background: var(--bg-1); }
+.swatch__color { height: 64px; }
+.swatch__meta { padding: 10px 12px; font: 400 var(--step--1)/1.4 var(--font-mono); }
+.swatch__meta b { display: block; font-weight: 500; color: var(--ink); }
+.swatch__meta span { color: var(--ink-3); }
+
+/* ===== Escala tipográfica ===== */
+.scale { display: grid; gap: var(--space-4); }
+.scale__row { display: grid; grid-template-columns: 96px 1fr; gap: 16px; align-items: baseline; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+.scale__row .mono { color: var(--ink-3); font-size: var(--step--1); }
+.t-5 { font: 800 var(--step-5)/1.02 var(--font-display); letter-spacing: -.025em; }
+.t-5 .w500 { font-weight: 500; display: block; }
+.t-4 { font: 700 var(--step-4)/1.06 var(--font-display); letter-spacing: -.02em; }
+.t-3 { font: 700 var(--step-3)/1.12 var(--font-display); letter-spacing: -.01em; }
+.t-2 { font: 700 var(--step-2)/1.25 var(--font-display); }
+.t-1 { font: 400 var(--step-1)/1.4 var(--font-body); color: var(--ink-2); max-width: 52ch; }
+.t-0 { font: 400 var(--step-0)/1.6 var(--font-body); max-width: 62ch; }
+.t--1 { font: 500 var(--step--1)/1.5 var(--font-mono); color: var(--ink-3); }
+
+/* ===== Estados de botones ===== */
+.states { display: grid; gap: 16px; }
+.states__row { display: grid; grid-template-columns: 120px repeat(3, auto); gap: 16px 24px; align-items: center; justify-content: start; }
+.states__row > .sheet__label { margin: 0; }
+.states__head { color: var(--ink-3); font: 500 var(--step--1)/1 var(--font-mono); }
+
+/* ===== Formulario ===== */
+.field { display: grid; gap: 6px; max-width: 420px; }
+.field label { font: 500 var(--step--1)/1.5 var(--font-body); color: var(--ink-2); }
+.field input {
+  height: 48px; padding: 0 14px; background: var(--bg-1); border: 1px solid var(--line-2); border-radius: 6px;
+  color: var(--ink); font: 400 var(--step-0)/1 var(--font-body);
+}
+.field input::placeholder { color: var(--ink-3); }
+.field input:focus-visible, .field input.is-focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); outline: none; }
+.field .hint { font: 400 var(--step--1)/1.5 var(--font-mono); color: var(--ink-3); }
+
+/* ===== Maqueta del hero con nav ===== */
+.mock {
+  position: relative; isolation: isolate; overflow: hidden; background: var(--bg-0);
+  border: 1px solid var(--line); border-radius: var(--radius-2);
+}
+.mock__nav {
+  position: absolute; inset: 0 0 auto 0; height: 64px; z-index: 3; display: flex; align-items: center;
+}
+.mock__nav .container { width: 100%; display: flex; align-items: center; gap: var(--space-6); }
+.brand { display: inline-flex; align-items: center; gap: 10px; font: 700 var(--step-0)/1 var(--font-display); letter-spacing: -.01em; text-decoration: none; }
+.brand__logo { width: 28px; height: 28px; border-radius: 6px; background: var(--ink); color: var(--bg-0); display: grid; place-items: center; font: 700 13px/1 var(--font-mono); }
+.mock__links { display: flex; gap: 28px; margin-left: auto; font: 500 var(--step--1)/1 var(--font-body); }
+.mock__links a { color: var(--ink-2); text-decoration: none; padding: 6px 2px; position: relative; }
+.mock__links a.is-active { color: var(--ink); }
+.mock__links a.is-active::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: var(--accent); }
+.mock__toggle { display: none; width: 44px; height: 44px; margin-left: auto; position: relative; background: none; border: 0; }
+.mock__toggle::before, .mock__toggle::after { content: ""; position: absolute; left: 12px; width: 20px; height: 2px; background: var(--ink); }
+.mock__toggle::before { top: 17px; } .mock__toggle::after { top: 25px; }
+
+/* Fondo de código simulado: tres capas de texto mono, sin JS */
+.rain {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+  font: 500 14px/22px var(--font-mono); white-space: pre; user-select: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 96px, #000 calc(100% - 140px), transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 96px, #000 calc(100% - 140px), transparent 100%);
+}
+.rain > div { position: absolute; inset: 0; padding: 4px 8px; }
+.rain__sed { color: var(--ink-3); opacity: .10; }
+.rain__typed { color: var(--ink-2); opacity: .55; }
+.rain__typed .k { color: var(--accent-2); } .rain__typed .s { color: var(--accent); } .rain__typed .c { color: var(--ink-3); }
+.rain__focus { color: var(--ink-2); opacity: .85; }
+.rain__focus .k { color: var(--accent-2); } .rain__focus .s { color: var(--accent); }
+.rain__focus .cur { display: inline-block; width: .55ch; height: 1em; background: var(--accent); vertical-align: -2px; }
+/* Charco bajo el titular (la viñeta central, anclada al h1) */
+.rain__pool {
+  position: absolute; inset: 0; z-index: 1;
+  background: radial-gradient(ellipse 46% 60% at 30% 52%, var(--bg-0) 0%, rgba(21,18,15,.92) 35%, rgba(21,18,15,0) 100%);
+}
+@media (max-width: 899px) {
+  .rain__pool { background: radial-gradient(ellipse 80% 55% at 50% 42%, var(--bg-0) 0%, rgba(21,18,15,.92) 40%, rgba(21,18,15,0) 100%); }
+}
+
+.hero { position: relative; z-index: 2; padding: 128px 0 96px; }
+.hero__grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; align-items: start; }
+.hero__copy { grid-column: 1 / 9; display: grid; gap: var(--space-5); }
+.hero__precios { grid-column: 9 / 13; }
+.hero h1 { font: 800 min(var(--step-5), 4rem)/1.02 var(--font-display); letter-spacing: -.025em; max-width: 20ch; }
+.hero h1 span { display: block; }
+.hero h1 .w500 { font-weight: 500; }
+.lede { font: 400 var(--step-1)/1.4 var(--font-body); color: var(--ink-2); max-width: 52ch; }
+.cluster { display: flex; flex-wrap: wrap; gap: 12px; }
+.meta { font: 400 var(--step--1)/1.5 var(--font-mono); color: var(--ink-3); }
+.meta span + span::before { content: " · "; }
+
+.precios {
+  background: var(--bg-1); background: color-mix(in srgb, var(--bg-1) 86%, transparent);
+  border: 1px solid var(--line); border-radius: var(--radius-2); padding: 20px 22px;
+  font-variant-numeric: tabular-nums;
+}
+.precios__head, .precios__foot { display: flex; justify-content: space-between; font: 500 var(--step--1)/1.5 var(--font-mono); color: var(--ink-3); }
+.precios__head { padding-bottom: 10px; border-bottom: 1px dashed var(--line-2); margin-bottom: 6px; }
+.precios__foot { display: grid; gap: 2px; padding-top: 10px; border-top: 1px dashed var(--line-2); margin-top: 6px; font-weight: 400; }
+.precios a { display: flex; align-items: baseline; gap: 8px; min-height: 40px; padding: 6px 4px; text-decoration: none; border-radius: 4px; }
+.precios a:hover { background: var(--bg-2); }
+.precios a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.precios .n { font: 500 var(--step--1)/1.3 var(--font-body); color: var(--ink); max-width: 70%; }
+.precios .l { flex: 1; border-bottom: 1px dotted var(--line-2); transform: translateY(-4px); min-width: 12px; }
+.precios .p { font: 500 var(--step-0)/1.3 var(--font-mono); color: var(--ink); }
+
+/* Regla de ticket donde "se arranca" la lluvia */
+.ticket-edge { border-top: 1px dashed var(--line-2); margin-top: 0; padding-top: var(--space-6); }
+
+@media (max-width: 1023px) {
+  .hero__copy { grid-column: 1 / 13; }
+  .hero__precios { grid-column: 1 / 13; }
+}
+@media (max-width: 899px) {
+  .mock__nav { height: 56px; }
+  .mock__links, .mock__nav .btn { display: none; }
+  .hero h1 { text-wrap: pretty; max-width: none; }
+  .rain__typed, .rain__focus { left: -900px; }
+  .mock__toggle { display: block; }
+  .hero { padding: 96px 0 64px; }
+  .hero__grid { grid-template-columns: 1fr; gap: var(--space-4); }
+  .hero__copy { display: contents; }
+  .hero__copy > * { grid-column: 1; }
+  .hero__precios { order: 5; }
+  .hero__meta { order: 6; }
+  .precios { padding: 14px 16px; }
+  .precios a { min-height: 36px; padding: 4px 2px; }
+  .precios .n, .precios .p { font-size: var(--step--1); }
+  .precios__foot { display: none; }
+  .cluster .btn--lg { flex: 1 1 auto; }
+  .states__row { grid-template-columns: 1fr; }
+  .scale__row { grid-template-columns: 1fr; gap: 4px; }
+}
+</style>
+</head>
+<body>
+
+<header class="container" style="padding-block: var(--space-7) var(--space-5);">
+  <p class="eyebrow">lámina de estilo · código de mostrador</p>
+  <h1 style="font: 700 var(--step-3)/1.12 var(--font-display); letter-spacing:-.01em; margin-top: 8px;">programadormx.online</h1>
+  <p class="sheet__note" style="margin-top: 8px;">Tokens, tipografía, botones, tarjeta, chip, tag, FAQ y una maqueta estática del hero con la nav encima. Todo lo que se ve aquí sale de <span class="mono">00-tokens.css</span> y de DESIGN.md.</p>
+</header>
+
+<!-- ===================== 1. Maqueta del hero ===================== -->
+<section class="container sheet" aria-label="Maqueta estática del hero">
+  <p class="sheet__label">01 · hero con nav (maqueta estática, fondo de código simulado con texto mono en capas)</p>
+  <div class="mock">
+    <div class="mock__nav">
+      <div class="container">
+        <a class="brand" href="#"><span class="brand__logo" aria-hidden="true">&gt;_</span>ProgramadorMX</a>
+        <nav class="mock__links" aria-label="Principal">
+          <a class="is-active" href="#">Productos</a><a href="#">Precios</a><a href="#">Cómo funciona</a><a href="#">Preguntas</a><a href="#">Contacto</a>
+        </nav>
+        <a class="btn btn--primary btn--wa btn--sm" href="#" style="margin-left: 0;">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3.3 4.4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.4Z"/></svg>
+          WhatsApp
+        </a>
+        <button class="mock__toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil"></button>
+      </div>
+    </div>
+
+    <div class="rain" aria-hidden="true">
+      <div class="rain__sed">final cita = Cita(hora: '10:30', cliente: 'Luis');    citas.where((c) => c.dia == hoy).toList();      qr.generar(url: menu.url);
+await recordatorio.enviar(cita, via: WhatsApp);      if (mesa.ocupada) return;    sellos.agregar(cliente);    corteDelDia.imprimir();
+// le llega el recordatorio un día antes       pedido.total += producto.precio * cantidad;    return Scaffold(body: Agenda());
+SELECT SUM(total) FROM ventas WHERE dia = HOY;   class Pedido { final List&lt;Producto&gt; items; }   db.insert('ventas', venta.toMap());
+    inventario.descontar('shampoo', cantidad);   "menu": ["pastor", "bistec", "suadero"]    final hoy = DateTime.now();
+whatsapp.abrir(mensaje: 'Hola, quiero agendar');   // el dueño abre la app y ve su día    List&lt;Cita&gt; agenda = await repo.deHoy();
+  Text(cliente.nombre, style: negrita);   carrito.agregar(taco, cantidad: 3);   horarios = [9, 10, 11, 12, 16, 17, 18];
+UPDATE inventario SET stock = stock - 1 WHERE sku = @sku;    if (sellos.length == 10) premio.otorgar();    notificar(negocio.telefono, pedido.resumen());
+// la app es del negocio, no de una plataforma     mensaje = 'Tu cita es mañana a las ${cita.hora}';    return Scaffold(body: Agenda());
+final cita = Cita(hora: '10:30', cliente: 'Luis');    citas.where((c) => c.dia == hoy).toList();      qr.generar(url: menu.url);
+await recordatorio.enviar(cita, via: WhatsApp);      if (mesa.ocupada) return;    sellos.agregar(cliente);    corteDelDia.imprimir();
+// sin comisiones: el pedido llega directo      pedido.total += producto.precio * cantidad;    return Scaffold(body: Agenda());
+SELECT SUM(total) FROM ventas WHERE dia = HOY;   class Pedido { final List&lt;Producto&gt; items; }   db.insert('ventas', venta.toMap());
+    inventario.descontar('shampoo', cantidad);   "menu": ["pastor", "bistec", "suadero"]    final hoy = DateTime.now();
+whatsapp.abrir(mensaje: 'Hola, quiero agendar');   // el dueño abre la app y ve su día    List&lt;Cita&gt; agenda = await repo.deHoy();
+  Text(cliente.nombre, style: negrita);   carrito.agregar(taco, cantidad: 3);   horarios = [9, 10, 11, 12, 16, 17, 18];
+UPDATE inventario SET stock = stock - 1 WHERE sku = @sku;    if (sellos.length == 10) premio.otorgar();    notificar(negocio.telefono, pedido.resumen());
+// la app es del negocio, no de una plataforma     mensaje = 'Tu cita es mañana a las ${cita.hora}';    return Scaffold(body: Agenda());
+final cita = Cita(hora: '10:30', cliente: 'Luis');    citas.where((c) => c.dia == hoy).toList();      qr.generar(url: menu.url);
+await recordatorio.enviar(cita, via: WhatsApp);      if (mesa.ocupada) return;    sellos.agregar(cliente);    corteDelDia.imprimir();
+// le llega el recordatorio un día antes       pedido.total += producto.precio * cantidad;    return Scaffold(body: Agenda());
+SELECT SUM(total) FROM ventas WHERE dia = HOY;   class Pedido { final List&lt;Producto&gt; items; }   db.insert('ventas', venta.toMap());
+    inventario.descontar('shampoo', cantidad);   "menu": ["pastor", "bistec", "suadero"]    final hoy = DateTime.now();
+whatsapp.abrir(mensaje: 'Hola, quiero agendar');   // el dueño abre la app y ve su día    List&lt;Cita&gt; agenda = await repo.deHoy();
+  Text(cliente.nombre, style: negrita);   carrito.agregar(taco, cantidad: 3);   horarios = [9, 10, 11, 12, 16, 17, 18];
+UPDATE inventario SET stock = stock - 1 WHERE sku = @sku;    if (sellos.length == 10) premio.otorgar();    notificar(negocio.telefono, pedido.resumen());
+// la app es del negocio, no de una plataforma     mensaje = 'Tu cita es mañana a las ${cita.hora}';    return Scaffold(body: Agenda());
+final cita = Cita(hora: '10:30', cliente: 'Luis');    citas.where((c) => c.dia == hoy).toList();      qr.generar(url: menu.url);
+await recordatorio.enviar(cita, via: WhatsApp);      if (mesa.ocupada) return;    sellos.agregar(cliente);    corteDelDia.imprimir();
+// le llega el recordatorio un día antes       pedido.total += producto.precio * cantidad;    return Scaffold(body: Agenda());
+SELECT SUM(total) FROM ventas WHERE dia = HOY;   class Pedido { final List&lt;Producto&gt; items; }   db.insert('ventas', venta.toMap());
+    inventario.descontar('shampoo', cantidad);   "menu": ["pastor", "bistec", "suadero"]    final hoy = DateTime.now();
+whatsapp.abrir(mensaje: 'Hola, quiero agendar');   // el dueño abre la app y ve su día    List&lt;Cita&gt; agenda = await repo.deHoy();
+  Text(cliente.nombre, style: negrita);   carrito.agregar(taco, cantidad: 3);   horarios = [9, 10, 11, 12, 16, 17, 18];</div>
+      <div class="rain__typed">
+
+
+
+                                                                                                              <span class="k">final</span> cita = Cita(hora: <span class="s">'10:30'</span>, cliente: <span class="s">'Luis'</span>);
+
+                                                                                                                  <span class="k">await</span> recordatorio.enviar(cita, via: WhatsApp);
+
+
+
+                                                                                                          <span class="c">// le llega el recordatorio un día antes</span>
+
+
+                                                                                                                <span class="k">SELECT</span> SUM(total) <span class="k">FROM</span> ventas <span class="k">WHERE</span> dia = HOY;
+
+
+
+                                                                                                              pedido.total += producto.precio * cantidad;
+
+
+                                                                                                                  <span class="k">if</span> (mesa.ocupada) <span class="k">return</span>;
+
+                                                                                                          citas.where((c) => c.dia == hoy).toList();
+
+
+
+
+                                                                                                              inventario.descontar(<span class="s">'shampoo'</span>, cantidad);
+
+
+                                                                                                                    <span class="k">return</span> Scaffold(body: Agenda());
+
+
+                                                                                                          <span class="c">// sin comisiones: el pedido llega directo</span>
+</div>
+      <div class="rain__focus">
+
+
+
+
+
+
+
+                                                                                                                      whatsapp.abrir(mensaje: <span class="s">'Hola, quiero agend</span><span class="cur"></span>
+
+
+
+
+
+
+
+
+
+
+                                                                                                                <span class="k">List</span>&lt;Cita&gt; agenda = <span class="k">await</span> repo.de<span class="cur"></span>
+</div>
+      <div class="rain__pool"></div>
+    </div>
+
+    <div class="hero">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow">apps y páginas web para negocios pequeños</p>
+          <h1><span>Tus clientes agendan y piden solos.</span><span class="w500">Tú abres la app y ves tu día.</span></h1>
+          <p class="lede">Agenda de citas, pedidos por WhatsApp, menú digital QR o tu página web. Sin comisiones y con precio cerrado antes de empezar. Para barberías, taquerías, consultorios y tiendas de Tampico, Madero, Altamira y todo México.</p>
+          <div class="cluster">
+            <a class="btn btn--wa btn--lg" href="#">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3.3 4.4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.4Z"/></svg>
+              Cotizar por WhatsApp
+            </a>
+            <a class="btn btn--ghost btn--lg" href="#">Ver precios</a>
+          </div>
+          <p class="meta hero__meta"><span>Te respondo yo, no un bot</span><span>Lunes a viernes, 9:00 a 18:00</span><span>Ciudad Madero y remoto a todo México</span></p>
+        </div>
+        <aside class="hero__precios" aria-label="Precios desde, por producto">
+          <div class="precios">
+            <div class="precios__head"><span>precios desde</span><span>MXN</span></div>
+            <a href="#"><span class="n">Agenda de citas por WhatsApp</span><span class="l"></span><span class="p">$7,900</span></a>
+            <a href="#"><span class="n">Catálogo y pedidos por WhatsApp</span><span class="l"></span><span class="p">$8,900</span></a>
+            <a href="#"><span class="n">Menú digital QR</span><span class="l"></span><span class="p">$3,900</span></a>
+            <a href="#"><span class="n">Tarjeta de lealtad digital</span><span class="l"></span><span class="p">$5,900</span></a>
+            <a href="#"><span class="n">Inventario y corte del día</span><span class="l"></span><span class="p">$9,900</span></a>
+            <a href="#"><span class="n">Página web con botón de WhatsApp</span><span class="l"></span><span class="p">$4,900</span></a>
+            <div class="precios__foot"><span>hosting, dominio y soporte · $249/mes, opcional</span><span>precio cerrado antes de empezar</span></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+    <div class="container ticket-edge" style="padding-bottom: var(--space-6); position: relative; z-index: 2;">
+      <p class="eyebrow">productos</p>
+      <p class="sheet__note" style="margin: 6px 0 0;">Aquí empieza la siguiente sección: la regla de ticket corta la lluvia.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 2. Paleta ===================== -->
+<section class="container sheet" aria-label="Paleta">
+  <h2 class="sheet__title">Paleta</h2>
+  <p class="sheet__note">Carbón cálido, tinta de ticket, un ámbar que solo vive en la tipografía y el verde reservado a WhatsApp.</p>
+  <div class="palette">
+    <div class="swatch"><div class="swatch__color" style="background:#15120F"></div><div class="swatch__meta"><b>--bg-0</b><span>#15120F · base, hero, theme_color</span></div></div>
+    <div class="swatch"><div class="swatch__color" style="background:#1C1814"></div><div class="swatch__meta"><b>--bg-1</b><span>#1C1814 · bandas, tarjetas</span></div></div>
+    <div class="swatch"><div class="swatch__color" style="background:#241F1A"></div><div class="swatch__meta"><b>--bg-2</b><span>#241F1A · chips, caja de icono</span></div></div>
+    <div class="swatch"><div class="swatch__color" style="background:#2E2823"></div><div class="swatch__meta"><b>--bg-3</b><span>#2E2823 · hover, cajón móvil</span></div></div>
+    <div class="swatch"><div class="swatch__color" style="background:#F4EEE6"></div><div class="swatch__meta"><b>--ink</b><span>#F4EEE6 · texto, botón papel</span></div></div>
+    <div class="swatch"><div class="swatch__color" style="background:#BDB3A7"></div><div class="swatch__meta"><b>--ink-2</b><span>#BDB3A7 · secundario</span></div></div>
+    <div class="swatch"><div class="swatch__color" style="background:#9C938A"></div><div class="swatch__meta"><b>--ink-3</b><span>#9C938A · meta mono</span></div></div>
+    <div class="swatch"><div class="swatch__color" style="background:#2A241F"></div><div class="swatch__meta"><b>--line</b><span>#2A241F · hairline decorativa</span></div></div>
+    <div class="swatch"><div class="swatch__color" style="background:#726B61"></div><div class="swatch__meta"><b>--line-2</b><span>#726B61 · bordes de control, ticket</span></div></div>
+    <div class="swatch"><div class="swatch__color" style="background:#F0A63C"></div><div class="swatch__meta"><b>--accent</b><span>#F0A63C · ámbar de foco</span></div></div>
+    <div class="swatch"><div class="swatch__color" style="background:#1C1206"></div><div class="swatch__meta"><b>--accent-ink</b><span>#1C1206 · texto sobre ámbar</span></div></div>
+    <div class="swatch"><div class="swatch__color" style="background:#7FB8C9"></div><div class="swatch__meta"><b>--accent-2</b><span>#7FB8C9 · iconos, palabras clave</span></div></div>
+    <div class="swatch"><div class="swatch__color" style="background:#33240F"></div><div class="swatch__meta"><b>--accent-soft</b><span>#33240F · lavado ámbar</span></div></div>
+    <div class="swatch"><div class="swatch__color" style="background:#7CC48B"></div><div class="swatch__meta"><b>--ok</b><span>#7CC48B · éxito</span></div></div>
+    <div class="swatch"><div class="swatch__color" style="background:#E8785A"></div><div class="swatch__meta"><b>--warn</b><span>#E8785A · error</span></div></div>
+    <div class="swatch"><div class="swatch__color" style="background:#25D366"></div><div class="swatch__meta"><b>--wa</b><span>#25D366 · WhatsApp</span></div></div>
+    <div class="swatch"><div class="swatch__color" style="background:#072D16"></div><div class="swatch__meta"><b>--wa-ink</b><span>#072D16 · texto sobre verde</span></div></div>
+  </div>
+</section>
+
+<!-- ===================== 3. Escala tipográfica ===================== -->
+<section class="container sheet" aria-label="Escala tipográfica">
+  <h2 class="sheet__title">Escala tipográfica</h2>
+  <p class="sheet__note">Bricolage Grotesque (display, 500–800) · IBM Plex Sans (cuerpo) · IBM Plex Mono (datos y eyebrows). Texto real del hero.</p>
+  <div class="scale">
+    <div class="scale__row"><span class="mono">step-5 · 800/500</span><p class="t-5">Tus clientes agendan y piden solos.<span class="w500">Tú abres la app y ves tu día.</span></p></div>
+    <div class="scale__row"><span class="mono">step-4 · 700</span><p class="t-4">App para agendar citas por WhatsApp</p></div>
+    <div class="scale__row"><span class="mono">step-3 · 700</span><p class="t-3">Lo que hago por tu negocio</p></div>
+    <div class="scale__row"><span class="mono">step-2 · 700</span><p class="t-2">Agenda de citas por WhatsApp</p></div>
+    <div class="scale__row"><span class="mono">step-1 · sans 400</span><p class="t-1">Agenda de citas, pedidos por WhatsApp, menú digital QR o tu página web. Sin comisiones y con precio cerrado antes de empezar.</p></div>
+    <div class="scale__row"><span class="mono">step-0 · sans 400</span><p class="t-0">Tus clientes agendan solos y les llega el recordatorio. Tú solo abres la app y ves el día. ¿Cuánto cuesta? Precio cerrado antes de empezar, sin sorpresas.</p></div>
+    <div class="scale__row"><span class="mono">step--1 · mono 500</span><p class="t--1">desde $7,900 MXN · 2 semanas · Lunes a viernes, 9:00 a 18:00</p></div>
+    <div class="scale__row"><span class="mono">eyebrow</span><p class="eyebrow">cómo funciona</p></div>
+  </div>
+</section>
+
+<!-- ===================== 4. Botones ===================== -->
+<section class="container sheet" aria-label="Botones">
+  <h2 class="sheet__title">Botones</h2>
+  <p class="sheet__note">Reposo, hover y foco. El verde es solo para WhatsApp; el papel para enviar el formulario; el fantasma para acciones secundarias. Sin sombra ni brillo.</p>
+  <div class="states">
+    <div class="states__row"><span class="states__head"></span><span class="states__head">reposo</span><span class="states__head">hover</span><span class="states__head">foco</span></div>
+    <div class="states__row">
+      <span class="sheet__label">.btn--wa</span>
+      <a class="btn btn--wa" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3.3 4.4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.4Z"/></svg>Cotizar por WhatsApp</a>
+      <a class="btn btn--wa is-hover" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3.3 4.4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.4Z"/></svg>Cotizar por WhatsApp</a>
+      <a class="btn btn--wa is-focus" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3.3 4.4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.4Z"/></svg>Cotizar por WhatsApp</a>
+    </div>
+    <div class="states__row">
+      <span class="sheet__label">.btn--primary</span>
+      <a class="btn btn--primary" href="#">Enviar por correo</a>
+      <a class="btn btn--primary is-hover" href="#">Enviar por correo</a>
+      <a class="btn btn--primary is-focus" href="#">Enviar por correo</a>
+    </div>
+    <div class="states__row">
+      <span class="sheet__label">.btn--ghost</span>
+      <a class="btn btn--ghost" href="#">Ver precios</a>
+      <a class="btn btn--ghost is-hover" href="#">Ver precios</a>
+      <a class="btn btn--ghost is-focus" href="#">Ver precios</a>
+    </div>
+    <div class="states__row">
+      <span class="sheet__label">.wa-float</span>
+      <a class="wa-float" href="#" aria-label="Escribir por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3.3 4.4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.4Z"/></svg></a>
+      <span class="btn btn--wa btn--sm"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3.3 4.4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.4Z"/></svg>WhatsApp <span class="muted" style="font-weight:400">(nav, --sm)</span></span>
+      <a class="wa-float is-focus" href="#" aria-label="Escribir por WhatsApp (foco)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3.3 4.4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.4Z"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 5. Tarjeta, chip, tag, formulario ===================== -->
+<section class="container sheet" aria-label="Tarjeta de producto, chip, tag y campo de formulario">
+  <h2 class="sheet__title">Tarjeta de producto · chip · tag · campo</h2>
+  <p class="sheet__note">La tarjeta es la única rejilla de tarjetas de la home. El precio "desde" va en ámbar; la cifra en display 700 tabular; la entrega en chip mono.</p>
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 24px; align-items: start;">
+    <article class="card card--lift card--destacado">
+      <div class="card__top">
+        <div class="card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18M13 16l2 2 4-4"/></svg>
+        </div>
+        <span class="tag">barberías · salones · consultorios</span>
+      </div>
+      <h3 class="card__title">Agenda de citas por WhatsApp</h3>
+      <p class="card__corto">Tus clientes agendan solos y les llega el recordatorio.</p>
+      <ul class="card__incluye">
+        <li>Horarios y servicios que tú defines</li>
+        <li>Confirmación y recordatorio por WhatsApp</li>
+        <li>Vista del día para ti y tu equipo</li>
+      </ul>
+      <div class="card__meta">
+        <span class="price"><span class="price__from">desde</span><span class="price__amount">$7,900</span><span class="price__currency">MXN</span></span>
+        <span class="chip">2 semanas</span>
+      </div>
+      <span class="chip chip--accent" style="justify-self: start;">recomendada para empezar</span>
+      <a class="btn btn--wa btn--sm" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3.3 4.4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.4Z"/></svg>Quiero esta app</a>
+    </article>
+
+    <div style="display:grid; gap: var(--space-6);">
+      <div>
+        <p class="sheet__label">.chip · .chip--accent · .tag</p>
+        <div class="cluster" style="align-items:center;">
+          <span class="chip">2 semanas</span>
+          <span class="chip chip--accent">recomendada para empezar</span>
+          <span class="tag">abarrotes · taquerías · papelerías</span>
+        </div>
+      </div>
+      <div>
+        <p class="sheet__label">.price (tarjeta) · precio en tabla</p>
+        <div class="cluster" style="align-items: baseline; gap: 24px;">
+          <span class="price"><span class="price__from">desde</span><span class="price__amount">$7,900</span><span class="price__currency">MXN</span></span>
+          <span class="mono" style="font-weight:500">$7,900 <span class="muted" style="font-weight:400">· 2 semanas</span></span>
+        </div>
+      </div>
+      <div class="field">
+        <p class="sheet__label">campo de formulario (reposo y foco)</p>
+        <label for="f1">Tu nombre</label>
+        <input id="f1" type="text" placeholder="Como te dicen en tu negocio">
+        <label for="f2" style="margin-top: 8px;">Tu WhatsApp</label>
+        <input id="f2" type="tel" class="is-focus" value="833 000 0000">
+        <span class="hint">te escribo por ahí, sin bots</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 6. FAQ ===================== -->
+<section class="container sheet" aria-label="Preguntas frecuentes">
+  <h2 class="sheet__title">FAQ (details / summary)</h2>
+  <p class="sheet__note">Reglas punteadas entre preguntas, "+" que gira a 45° y se vuelve ámbar al abrir. Sin chevrones ni cajas.</p>
+  <div class="faq">
+    <details open>
+      <summary>¿Cuánto cuesta una app para mi negocio?</summary>
+      <div class="faq__body"><div><p>Depende de lo que necesite tu negocio. Los precios de cada producto están en la tabla de precios y son "desde": antes de empezar te doy un precio cerrado por escrito, y ese es el que pagas. Sin comisiones por venta ni cargos que aparezcan después.</p></div></div>
+    </details>
+    <details>
+      <summary>¿Qué incluye el precio?</summary>
+      <div class="faq__body"><div><p>La app o página lista para usarse, la instalación en tu celular y una sesión para enseñarte a usarla.</p></div></div>
+    </details>
+    <details>
+      <summary>¿Cobras comisión por cada venta o pedido?</summary>
+      <div class="faq__body"><div><p>No. La app es tuya: lo que vendas con ella es tuyo.</p></div></div>
+    </details>
+  </div>
+</section>
+
+<footer class="container" style="padding-block: var(--space-6) var(--space-8); border-top: 1px dashed var(--line-2);">
+  <p class="mono muted" style="font-size: var(--step--1);">lámina de estilo · 17 sep 2026 · tokens verificados con tools/contrast_check.py</p>
+</footer>
+
+</body>
+</html>

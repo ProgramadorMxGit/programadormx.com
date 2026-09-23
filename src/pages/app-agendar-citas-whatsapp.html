@@ -1,0 +1,55 @@
+<!--meta
+{
+  "path": "/app-agendar-citas-whatsapp/",
+  "title": "Agenda de citas por WhatsApp para tu negocio | ProgramadorMX",
+  "description": "Una agenda con tus horarios y servicios, confirmaciones por WhatsApp y vista del día. Para barberías, salones y consultorios, con precio cerrado antes de empezar.",
+  "body_class": "page-landing",
+  "product": "agenda-citas-whatsapp",
+  "code_rain": false,
+  "og_image": "/assets/og/og-agenda.jpg",
+  "og_image_alt": "Un barbero muestra en su celular las citas de hoy junto al titular Tu agenda en orden."
+}
+-->
+<section class="landing-hero" aria-labelledby="agenda-title">
+  <img class="landing-hero__foto"
+       src="/assets/img/landing/agenda-citas-hero.webp"
+       srcset="/assets/img/landing/agenda-citas-hero.webp 1200w, /assets/img/landing/agenda-citas-hero@2x.webp 1448w"
+       sizes="100vw"
+       alt="{{ product.imagen_alt }}"
+       width="1448" height="814" fetchpriority="high" decoding="async">
+  <div class="container landing-hero__inner">
+    <p class="eyebrow">{{ product.nombre }}</p>
+    <h1 id="agenda-title">Tu agenda en orden.<br>Tu día más claro.</h1>
+    <p class="lede">{{ product.corto }} Tú y tu equipo tienen la vista del día en un mismo lugar.</p>
+    <div class="cluster">
+      <a class="btn btn--primary" href="{{ product.whatsapp_url }}" target="_blank" rel="noopener noreferrer" data-track="whatsapp_agenda_hero">Cotizar mi agenda {{ icon "arrow-up-right" }}</a>
+      <a class="btn btn--ghost" href="/#productos">Ver todas las soluciones {{ icon "arrow-right" }}</a>
+    </div>
+    <p class="landing-hero__meta">Desde {{ product.precio_fmt }} MXN <span></span> Entrega en {{ product.entrega }} <span></span> Sin comisiones</p>
+  </div>
+</section>
+
+<section class="page-standard page-standard--seguido" aria-label="Detalle del servicio">
+  <div class="container">
+    <div class="standard-card">
+      <p class="eyebrow">Una agenda para tu forma de trabajar</p>
+      <h2>Lo que incluye</h2>
+      <ul class="feature-list">
+        {{#each product.incluye}}
+        <li>{{ icon "check" }} <span>{{ this }}</span></li>
+        {{/each}}
+      </ul>
+      <p>Para {{ join product.para_quien ", " }}.</p>
+    </div>
+    <div class="standard-card">
+      <p class="eyebrow">Precio claro desde el principio</p>
+      <h2>Desde {{ product.precio_fmt }} MXN</h2>
+      <p class="lede">Entrega estimada: {{ product.entrega }}.</p>
+      <p>Cuéntame qué servicios ofreces y cómo organizas tus horarios. Antes de empezar, definimos lo que necesitas y un precio cerrado.</p>
+      <div class="cluster">
+        <a class="btn btn--primary" href="{{ product.whatsapp_url }}" target="_blank" rel="noopener noreferrer" data-track="whatsapp_agenda_pricing">Hablemos de tu agenda {{ icon "arrow-up-right" }}</a>
+        <a class="btn btn--ghost" href="/#precios">Comparar precios</a>
+      </div>
+    </div>
+  </div>
+</section>

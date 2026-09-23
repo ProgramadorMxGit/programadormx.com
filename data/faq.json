@@ -1,0 +1,34 @@
+[
+  {
+    "q": "¿Cuánto cuesta una app para mi negocio?",
+    "a": "Depende de lo que necesites, pero con precios cerrados: un menú digital QR desde $3,900 MXN; la agenda de citas o el catálogo con pedidos por WhatsApp entre $7,900 y $8,900; inventario y corte del día desde $9,900. Una agencia cobra por lo mismo entre $50,000 y $150,000. Antes de empezar te doy un precio fijo y ese es el que pagas."
+  },
+  {
+    "q": "¿Qué incluye el precio?",
+    "a": "Diseño, desarrollo, pruebas, instalación en tu celular y en los de tu equipo, una capacitación por videollamada y 30 días de ajustes después de la entrega. Si quieres que la app esté en Google Play, también lo incluyo."
+  },
+  {
+    "q": "¿Cuánto tarda?",
+    "a": "Entre una y tres semanas según el producto. El menú QR y la página web salen en una semana; la agenda y los pedidos en dos; el inventario en tres. Te digo la fecha antes de empezar."
+  },
+  {
+    "q": "¿Cobras comisión por cada venta o pedido?",
+    "a": "No. La app es tuya y los pedidos te llegan directo a tu WhatsApp. No hay porcentaje ni cuota por uso, a diferencia de las plataformas de reparto."
+  },
+  {
+    "q": "¿Necesito saber de tecnología?",
+    "a": "No. Si usas WhatsApp, puedes usar tu app. Todo lo que tengas que hacer (cambiar precios, ver citas, hacer tu corte) se hace desde el celular en un par de toques, y te enseño cómo."
+  },
+  {
+    "q": "¿Funciona en Android y en iPhone?",
+    "a": "Sí. Las apps las hago con Flutter, que funciona en los dos. Para publicar en la App Store de Apple se necesita una cuenta de desarrollador de Apple, que tiene un costo anual aparte; te explico las opciones antes de empezar."
+  },
+  {
+    "q": "¿Y si después quiero cambios o algo falla?",
+    "a": "Los primeros 30 días los ajustes van incluidos. Después puedes contratar el plan de hosting, dominio y soporte por $249 al mes, o pedirme cotización por cada cambio. Siempre me escribes directo a mí, no a un centro de atención."
+  },
+  {
+    "q": "¿Atiendes solo en Tampico?",
+    "a": "Presencial en Tampico, Ciudad Madero y Altamira. Para el resto de México trabajo a distancia: la mayoría de los proyectos se resuelven completos por WhatsApp y videollamada."
+  }
+]

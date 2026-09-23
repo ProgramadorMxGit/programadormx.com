@@ -1,0 +1,91 @@
+<meta charset="utf-8">
+<title>og-image programadormx.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+  :root {
+    --bg: #0a0b0d;
+    --ink: #ededef;
+    --ink-2: #b4b7bf;
+    --accent: #7c85f0;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body { background: var(--bg); position: relative; font-family: "IBM Plex Sans", "Segoe UI", sans-serif; }
+
+  .foto {
+    position: absolute; inset: 0;
+    background: url("v3-pantallas/p3.png") no-repeat 72% 50% / cover;
+  }
+  /* Velo grafito: deja respirar el celular a la derecha y da fondo limpio al texto */
+  .velo {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(100deg, #0a0b0d 0 30%, #0a0b0df2 42%, #0a0b0dcc 54%, #0a0b0d66 66%, #0a0b0d00 80%),
+      linear-gradient(0deg, #0a0b0d99 0 12%, transparent 40%);
+  }
+
+  .contenido {
+    position: absolute; inset: 0;
+    padding: 56px 60px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    width: 700px;
+  }
+
+  .marca { display: flex; align-items: center; gap: 13px; }
+  .marca img { width: 34px; height: 34px; display: block; }
+  .marca span {
+    font-family: "Bricolage Grotesque", sans-serif; font-weight: 600;
+    font-size: 25px; letter-spacing: -0.8px; color: var(--ink);
+  }
+  .marca b { font-weight: 400; color: #b0b4bb; }
+  .marca i { font-style: normal; color: var(--accent); }
+
+  h1 {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-weight: 500; font-size: 70px; line-height: 0.99;
+    letter-spacing: -3.4px; color: var(--ink);
+    max-width: 14ch;
+  }
+  h1 em { font-style: normal; font-weight: 500; color: var(--accent); position: relative; }
+  h1 em::after {
+    content: ""; position: absolute; left: 0; bottom: 4px; width: 94%; height: 2px;
+    background: linear-gradient(90deg, #7c85f080, transparent);
+  }
+  .sub {
+    font-size: 21px; line-height: 1.5; color: var(--ink-2); margin-top: 20px; max-width: 30ch;
+  }
+
+  .pie { display: flex; align-items: center; gap: 16px; }
+  .dato {
+    font-family: "IBM Plex Mono", monospace; font-weight: 500; font-size: 15px;
+    letter-spacing: 0.6px; color: var(--ink);
+    border: 1px solid #6a6e78; border-radius: 7px; padding: 10px 15px;
+  }
+  .dato.acento { border-color: #7c85f066; color: var(--accent); }
+  .dominio {
+    font-family: "IBM Plex Mono", monospace; font-size: 15px; letter-spacing: 0.8px; color: #8a8f98;
+  }
+</style>
+
+<div class="foto"></div>
+<div class="velo"></div>
+
+<div class="contenido">
+  <div class="marca">
+    <img src="logo-96.png" alt="">
+    <span>Programador<b>MX</b><i>.</i></span>
+  </div>
+
+  <div>
+    <h1>Tu negocio.<br>Un paso <em>adelante.</em></h1>
+    <p class="sub">Apps y páginas web para negocios pequeños. Citas, pedidos y menú digital por WhatsApp.</p>
+  </div>
+
+  <div class="pie">
+    <span class="dato acento">Desde $3,900 MXN</span>
+    <span class="dato">Sin comisiones</span>
+    <span class="dominio">programadormx.com</span>
+  </div>
+</div>

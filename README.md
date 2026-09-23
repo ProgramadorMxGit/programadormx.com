@@ -1,4 +1,28 @@
-# programadormx.online
+# programadormx.com
+
+## Cómo publicar un cambio
+
+La web se publica sola en **https://programadormx.com** con cada commit a `main`:
+
+```bash
+py -3 tools/build.py
+git add -A
+git commit -m "Describe el cambio"
+git push
+```
+
+El primer comando es opcional: sirve para revisar en local (`py -3 tools/serve.py`) antes de subir.
+Al hacer push, GitHub Actions (`.github/workflows/publicar.yml`) corre las pruebas, construye `dist/`
+y la publica en GitHub Pages en 1–2 minutos. Si una prueba o el build fallan, no se publica nada y
+la web se queda como estaba; el error se ve en la pestaña **Actions** del repositorio
+[ProgramadorMxGit/programadormx.com](https://github.com/ProgramadorMxGit/programadormx.com/actions).
+
+- `dist/` no se sube al repositorio: la genera GitHub en cada publicación.
+- El DNS de programadormx.com (Nominalia) apunta a GitHub Pages: A → 185.199.108–111.153 y
+  `www` CNAME → programadormxgit.github.io. El correo (MX/SPF) sigue en Nominalia.
+- Ya no hace falta subir nada por FTP.
+
+---
 
 Sitio de **ProgramadorMX**: apps móviles sencillas y páginas web para negocios pequeños en México (citas, pedidos y menú digital por WhatsApp, sin comisiones y con precio cerrado). Es un sitio estático: HTML, CSS y JavaScript puros, sin frameworks ni `npm`. Un script de Python arma la carpeta `dist/`, y esa carpeta se sube tal cual al hosting.
 
